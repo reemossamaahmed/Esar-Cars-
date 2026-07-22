@@ -72,4 +72,15 @@ class AuthController extends Controller
 
         return ApiResponse::success(null, __('auth.logout_success'));
     }
+
+    public function profile(Request $request): JsonResponse
+    {
+        return ApiResponse::success(
+
+            new UserResource($request->user()),
+
+            __('auth.profile_success')
+
+        );
+    }
 }

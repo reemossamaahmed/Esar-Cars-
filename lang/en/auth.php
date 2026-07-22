@@ -22,6 +22,8 @@ return [
 
     'invalid_credentials' => 'Invalid email or password',
 
+    'profile_success'=>'User profile retrieved successfully.',
+
     'account_disabled' => 'Your account is not active. Please contact support.',
 
     'email_required'=>'Email is required.',

@@ -29,7 +29,8 @@ return [
     'email_invalid'=>'البريد الإلكتروني غير صحيح.',
 
     'password_required'=>'كلمة المرور مطلوبة.',
-    
+
+    'profile_success'=>'تم جلب بيانات المستخدم بنجاح.',
 
 
     'failed' => 'These credentials do not match our records.',

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Validation\ValidationException;
-
+use App\Http\Responses\ApiResponse;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,15 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
         if($request->expectsJson()){
 
-            return response()->json([
-
-                'success'=>false,
-
-                'message'=>'Validation failed',
-
-                'errors'=>$e->errors()
-
-            ],422);
+            return ApiResponse::error(
+                message: __('messages.validation_failed'),
+                code: 422,
+                errors: $e->errors()
+            );
 
         }
 

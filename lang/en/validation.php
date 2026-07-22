@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'failed' => 'There are validation errors.',
     'accepted' => 'The :attribute field must be accepted.',
     'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
     'active_url' => 'The :attribute field must be a valid URL.',
@@ -195,6 +196,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email' => 'email address',
+    ],
 
 ];

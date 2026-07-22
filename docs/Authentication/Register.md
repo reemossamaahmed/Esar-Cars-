@@ -12,7 +12,6 @@ POST /api/v1/auth/register
     "phone":"string",
     "email":"string",
     "password":"string",
-    "password_confirmation":"string"
 }
 
 
@@ -23,8 +22,8 @@ POST /api/v1/auth/register
 | -------- | -------- | ------ | --------- |
 | name     | required | string |           |
 | email    | required | email  | unique    |
-| phone    | nullable | string |           |
-| password | required | min:8  | confirmed |
+| phone    | nullable | string | unique    |
+| password | required | min:8  |           |
 
 
 ## Success Response

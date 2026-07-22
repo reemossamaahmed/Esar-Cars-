@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Controllers\Api\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Services\AuthService;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\UserResource;
+use App\Http\Responses\ApiResponse;
+use Illuminate\Http\JsonResponse;
+
+class AuthController extends Controller
+{
+    public function __construct(private AuthService $authService)
+    {}
+
+
+
+
+    public function register(RegisterRequest $request) : JsonResponse
+    {
+
+        $result = $this->authService->register($request->validated());
+
+
+        return ApiResponse::success(
+
+            [
+
+                'user' => new UserResource($result['user']),
+
+                'token' => $result['token']
+
+            ],
+
+            __('auth.register_success'),
+
+            201
+        );
+
+    }
+}

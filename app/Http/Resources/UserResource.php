@@ -29,7 +29,7 @@ class UserResource extends JsonResource
             'city'=>$this->city,
 
 
-            'roles'=>$this->getRoleNames(),
+            'role' => $this->getRoleNames()->first(),
 
 
             'status'=>$this->status,

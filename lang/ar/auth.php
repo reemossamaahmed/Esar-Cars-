@@ -20,7 +20,15 @@ return [
 
     'logout_success' => 'تم تسجيل الخروج بنجاح',
 
-    'invalid_credentials' => 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
+    'invalid_credentials'=>'بيانات الدخول غير صحيحة.',
+
+    'account_disabled'=>'الحساب غير مفعل.',
+
+    'email_required'=>'البريد الإلكتروني مطلوب.',
+
+    'email_invalid'=>'البريد الإلكتروني غير صحيح.',
+
+    'password_required'=>'كلمة المرور مطلوبة.',
 
 
     'failed' => 'These credentials do not match our records.',

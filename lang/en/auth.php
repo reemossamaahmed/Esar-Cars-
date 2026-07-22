@@ -22,6 +22,14 @@ return [
 
     'invalid_credentials' => 'Invalid email or password',
 
+    'account_disabled'=>'Account is disabled.',
+
+    'email_required'=>'Email is required.',
+
+    'email_invalid'=>'Email must be valid.',
+
+    'password_required'=>'Password is required.',
+
 
 
 

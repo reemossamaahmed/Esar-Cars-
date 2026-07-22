@@ -52,4 +52,17 @@ class RegisterRequest extends FormRequest
 
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+
+            'email.unique' => __('auth.email_exists'),
+
+            'phone.unique' => __('auth.phone_exists'),
+
+            'password.min' => __('auth.password_min'),
+
+        ];
+    }
 }

@@ -4,9 +4,9 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Enums\UserStatus;
 
 class AuthService
 {
@@ -15,17 +15,18 @@ class AuthService
     {
 
         return DB::transaction(function () use ($data){
+
             $user = User::create([
 
-            'name'=>$data['name'],
+                'name'=>$data['name'],
 
-            'phone'=>$data['phone'] ?? null,
+                'phone'=>$data['phone'] ?? null,
 
-            'email'=>$data['email'],
+                'email'=>$data['email'],
 
-            'password'=>$data['password'],
+                'password'=>$data['password'],
 
-            'status'=>'active',
+                'status' => UserStatus::ACTIVE,
 
             ]);
 
@@ -71,24 +72,16 @@ class AuthService
             ]);
         }
 
-
-
-        if(!$user->status)
+        if ($user->status !== UserStatus::ACTIVE)
         {
             throw ValidationException::withMessages([
 
-                'email'=>[
-                    __('auth.account_disabled')
-                ]
+                'email'=>[ __('auth.account_disabled') ]
 
             ]);
         }
 
-
-
         $token = $user->createToken('api-token')->plainTextToken;
-
-
 
         return [
 
@@ -98,6 +91,11 @@ class AuthService
 
         ];
 
+    }
+
+    public function logout(User $user): void
+    {
+        $user->currentAccessToken()->delete();
     }
 
 }

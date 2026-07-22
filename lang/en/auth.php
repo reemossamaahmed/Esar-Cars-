@@ -22,7 +22,7 @@ return [
 
     'invalid_credentials' => 'Invalid email or password',
 
-    'account_disabled'=>'Account is disabled.',
+    'account_disabled' => 'Your account is not active. Please contact support.',
 
     'email_required'=>'Email is required.',
 

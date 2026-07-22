@@ -22,13 +22,14 @@ return [
 
     'invalid_credentials'=>'بيانات الدخول غير صحيحة.',
 
-    'account_disabled'=>'الحساب غير مفعل.',
+    'account_disabled' => 'الحساب غير نشط، يرجى التواصل مع الإدارة.',
 
     'email_required'=>'البريد الإلكتروني مطلوب.',
 
     'email_invalid'=>'البريد الإلكتروني غير صحيح.',
 
     'password_required'=>'كلمة المرور مطلوبة.',
+    
 
 
     'failed' => 'These credentials do not match our records.',

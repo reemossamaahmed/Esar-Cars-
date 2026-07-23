@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 use App\Http\Responses\ApiResponse;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -19,17 +20,28 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
 
         $exceptions->render(function (ValidationException $e, $request){
+            if($request->expectsJson()){
 
-        if($request->expectsJson()){
+                return ApiResponse::error(
+                    message: __('messages.validation_failed'),
+                    code: 422,
+                    errors: $e->errors()
+                );
 
-            return ApiResponse::error(
-                message: __('messages.validation_failed'),
-                code: 422,
-                errors: $e->errors()
-            );
+            }
+        });
 
-        }
+        $exceptions->render(function (AuthenticationException $e, $request) {
 
-    });
+            if ($request->expectsJson()) {
+
+                return ApiResponse::error(
+                    __('auth.unauthenticated'),
+                    401
+                );
+
+            }
+
+        });
 
     })->create();

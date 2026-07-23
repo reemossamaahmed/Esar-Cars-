@@ -16,7 +16,8 @@ Route::prefix('v1')->group(function(){
 
         route::middleware('auth:sanctum')->group(function(){
             Route::post('/logout','logout');
-            Route::get('/profile','profile');
+            Route::get('/profile','showProfile');
+            Route::put('/profile', 'updateProfile');
         });
 
     });

@@ -32,6 +32,10 @@ return [
 
     'profile_success'=>'تم جلب بيانات المستخدم بنجاح.',
 
+    'unauthenticated' => 'يجب تسجيل الدخول أولاً.',
+
+    'profile_updated' => 'تم تحديث الملف الشخصي بنجاح.',
+
 
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',

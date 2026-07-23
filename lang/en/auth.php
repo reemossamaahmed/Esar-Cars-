@@ -24,6 +24,10 @@ return [
 
     'profile_success'=>'User profile retrieved successfully.',
 
+    'unauthenticated' => 'Unauthenticated.',
+
+    'profile_updated' => 'Profile updated successfully.',
+
     'account_disabled' => 'Your account is not active. Please contact support.',
 
     'email_required'=>'Email is required.',

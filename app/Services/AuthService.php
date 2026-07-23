@@ -98,4 +98,11 @@ class AuthService
         $user->currentAccessToken()->delete();
     }
 
+    public function updateProfile(User $user, array $data): User
+    {
+        $user->update($data);
+
+        return $user->refresh();
+    }
+
 }

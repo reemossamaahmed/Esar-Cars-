@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\AuthService;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -73,13 +74,28 @@ class AuthController extends Controller
         return ApiResponse::success(null, __('auth.logout_success'));
     }
 
-    public function profile(Request $request): JsonResponse
+    public function showProfile(Request $request): JsonResponse
     {
         return ApiResponse::success(
 
             new UserResource($request->user()),
 
             __('auth.profile_success')
+
+        );
+    }
+
+    public function updateProfile(UpdateProfileRequest $request): JsonResponse
+    {
+
+        $user = $this->authService->updateProfile($request->user(),$request->validated());
+
+
+        return ApiResponse::success(
+
+            new UserResource($user),
+
+            __('auth.profile_updated')
 
         );
     }

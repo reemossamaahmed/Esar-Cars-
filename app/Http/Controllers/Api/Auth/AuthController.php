@@ -11,6 +11,7 @@ use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Requests\Auth\VerifyEmailRequest;
+use App\Http\Requests\Auth\ResendVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -154,6 +155,26 @@ class AuthController extends Controller
             null,
 
             __('auth.email_verified'),
+
+            200
+
+        );
+
+    }
+
+    public function resendVerification(ResendVerificationRequest $request): JsonResponse
+    {
+
+        $result = $this->authService->resendVerification($request->validated());
+
+
+        return ApiResponse::success(
+
+            [
+                'otp'=>$result
+            ],
+
+            __('auth.otp_sent'),
 
             200
 

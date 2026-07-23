@@ -327,6 +327,45 @@ class AuthService
 
     }
 
+    public function resendVerification(array $data): string
+    {
+
+        $user = User::where('email',$data['email'])->first();
+
+
+        if(!$user){
+
+            throw ValidationException::withMessages([
+
+                'email'=>[
+                    __('auth.user_not_found')
+                ]
+
+            ]);
+
+        }
+
+
+        if($user->email_verified_at){
+
+            throw ValidationException::withMessages([
+
+                'email'=>[
+                    __('auth.email_already_verified')
+                ]
+
+            ]);
+
+        }
+
+
+        $verification = $this->createVerificationOtp($user);
+
+
+        return $verification->otp;
+
+    }
+
 
     private function createVerificationOtp(User $user): EmailVerification
     {

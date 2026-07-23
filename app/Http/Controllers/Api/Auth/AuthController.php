@@ -9,6 +9,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\UpdateProfileRequest;
 use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -123,6 +124,21 @@ class AuthController extends Controller
 
 
         return ApiResponse::success(null, __('auth.otp_sent'));
+
+    }
+
+    public function resetPassword(ResetPasswordRequest $request): JsonResponse
+    {
+
+        $this->authService->resetPassword(
+            $request->validated()
+        );
+
+
+        return ApiResponse::success(
+            null,
+            __('auth.password_reset_success')
+        );
 
     }
 

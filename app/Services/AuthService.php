@@ -181,4 +181,75 @@ class AuthService
 
     }
 
+    public function resetPassword(array $data): void
+    {
+
+        $otp = PasswordOtp::where('email', $data['email'])
+            ->where('used', false)
+            ->latest()
+            ->first();
+
+
+        if (!$otp) {
+
+            throw ValidationException::withMessages([
+
+                'otp'=>[
+                    __('auth.invalid_otp')
+                ]
+
+            ]);
+
+        }
+
+
+        if ($otp->expires_at->isPast()) {
+
+            throw ValidationException::withMessages([
+
+                'otp'=>[
+                    __('auth.expired_otp')
+                ]
+
+            ]);
+
+        }
+
+
+        if ($otp->otp != $data['otp']) {
+
+            throw ValidationException::withMessages([
+
+                'otp'=>[
+                    __('auth.invalid_otp')
+                ]
+
+            ]);
+
+        }
+
+
+        $user = User::where('email',$data['email'])
+            ->first();
+
+
+        $user->update([
+
+            'password'=>$data['password']
+
+        ]);
+
+
+        // logout all devices
+        $user->tokens()->delete();
+
+
+        $otp->update([
+
+            'used'=>true
+
+        ]);
+
+    }
+
 }

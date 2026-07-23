@@ -12,7 +12,11 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'invalid_otp'=>'Invalid OTP.',
 
+    'expired_otp'=>'OTP has expired.',
+
+    'password_reset_success' => 'Password reset successfully.',
 
     'otp_sent' => 'OTP sent successfully.',
 

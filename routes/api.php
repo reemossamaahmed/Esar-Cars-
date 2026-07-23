@@ -14,6 +14,7 @@ Route::prefix('v1')->group(function(){
         Route::post('/register','register');
         Route::post('/login','login');
         Route::post('/forgot-password','forgotPassword');
+        Route::post('/reset-password', 'resetPassword');
 
         route::middleware('auth:sanctum')->group(function(){
             Route::post('/logout','logout');

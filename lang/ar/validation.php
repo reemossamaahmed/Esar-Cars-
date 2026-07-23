@@ -13,6 +13,9 @@ return [
     |
     */
 
+    'invalid_otp'=>'رمز التحقق غير صحيح.',
+    'expired_otp'=>'انتهت صلاحية رمز التحقق.',
+    'otp_required' => 'رمز التحقق مطلوب.',
     'email_required' => 'البريد الإلكتروني مطلوب.',
     'email_invalid' => 'البريد الإلكتروني غير صحيح.',
     'current_password_required' => 'كلمة المرور الحالية مطلوبة.',

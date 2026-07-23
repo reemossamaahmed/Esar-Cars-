@@ -13,6 +13,8 @@ return [
     |
     */
 
+    'email_required' => 'البريد الإلكتروني مطلوب.',
+    'email_invalid' => 'البريد الإلكتروني غير صحيح.',
     'current_password_required' => 'كلمة المرور الحالية مطلوبة.',
     'password_required' => 'كلمة المرور الجديدة مطلوبة.',
     'password_min' => 'كلمة المرور يجب ألا تقل عن :min أحرف.',

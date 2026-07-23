@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\UpdateProfileRequest;
 use App\Http\Requests\Auth\ChangePasswordRequest;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -114,4 +115,16 @@ class AuthController extends Controller
         );
 
     }
+
+    public function forgotPassword(ForgotPasswordRequest $request): JsonResponse
+    {
+
+        $this->authService->forgotPassword($request->validated());
+
+
+        return ApiResponse::success(null, __('auth.otp_sent'));
+
+    }
+
+
 }

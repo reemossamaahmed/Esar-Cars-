@@ -13,6 +13,9 @@ return [
     |
     */
 
+    'otp_sent' => 'تم إرسال رمز التحقق بنجاح.',
+
+    'email_not_found' => 'البريد الإلكتروني غير موجود.',
 
     'register_success' => 'تم إنشاء الحساب بنجاح',
 
@@ -40,6 +43,7 @@ return [
 
 
     'failed' => 'These credentials do not match our records.',
+
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

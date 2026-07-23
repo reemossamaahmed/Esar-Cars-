@@ -13,6 +13,8 @@ return [
     |
     */
 
+    'email_required' => 'Email is required.',
+    'email_invalid' => 'Email format is invalid.',
     'current_password_required' => 'Current password is required.',
     'password_required' => 'New password is required.',
     'password_min' => 'Password must be at least :min characters.',

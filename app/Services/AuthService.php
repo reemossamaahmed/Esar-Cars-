@@ -4,9 +4,12 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Enums\UserStatus;
+use App\Models\PasswordOtp;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AuthService
 {
@@ -132,6 +135,49 @@ class AuthService
 
         // Logout from all devices
         $user->tokens()->delete();
+
+    }
+
+    public function forgotPassword(array $data): void
+    {
+        $user = User::where('email', $data['email'])->first();
+
+
+        if (!$user) {
+
+            throw ValidationException::withMessages([
+
+                'email' => [
+                    __('auth.email_not_found')
+                ]
+
+            ]);
+
+        }
+
+
+        // Delete old OTPs
+        PasswordOtp::where('email', $data['email'])->delete();
+
+
+
+        // Generate OTP
+        $otp = random_int(100000, 999999);
+
+
+
+        // Store OTP hashed
+        PasswordOtp::create([
+
+            'email' => $data['email'],
+
+            // 'otp' => Hash::make($otp),
+
+            'otp' => $otp,
+
+            'expires_at' => now()->addMinutes(10),
+
+        ]);
 
     }
 

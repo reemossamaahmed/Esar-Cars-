@@ -14,6 +14,10 @@ return [
     */
 
 
+    'otp_sent' => 'OTP sent successfully.',
+
+    'email_not_found' => 'Email does not exist.',
+
     'register_success' => 'Registered successfully',
 
     'login_success' => 'Login successfully',
@@ -29,7 +33,7 @@ return [
     'profile_updated' => 'Profile updated successfully.',
 
     'invalid_current_password' => 'Current password is incorrect.',
-    
+
     'password_changed' => 'Password changed successfully.',
 
     'account_disabled' => 'Your account is not active. Please contact support.',

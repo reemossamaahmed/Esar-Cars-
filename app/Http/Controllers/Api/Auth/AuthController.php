@@ -10,6 +10,7 @@ use App\Http\Requests\Auth\UpdateProfileRequest;
 use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\Auth\VerifyEmailRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -34,8 +35,6 @@ class AuthController extends Controller
             [
 
                 'user' => new UserResource($result['user']),
-
-                'token' => $result['token']
 
             ],
 
@@ -138,6 +137,26 @@ class AuthController extends Controller
         return ApiResponse::success(
             null,
             __('auth.password_reset_success')
+        );
+
+    }
+
+    public function verifyEmail(VerifyEmailRequest $request): JsonResponse
+    {
+
+        $this->authService->verifyEmail(
+            $request->validated()
+        );
+
+
+        return ApiResponse::success(
+
+            null,
+
+            __('auth.email_verified'),
+
+            200
+
         );
 
     }

@@ -12,6 +12,7 @@ Route::prefix('v1')->group(function(){
     Route::prefix('auth')->controller(AuthController::class)->group(function(){
 
         Route::post('/register','register');
+        Route::post('/verify-email', 'verifyEmail');
         Route::post('/login','login');
         Route::post('/forgot-password','forgotPassword');
         Route::post('/reset-password', 'resetPassword');

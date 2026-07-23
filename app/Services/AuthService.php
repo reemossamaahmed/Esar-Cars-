@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\EmailVerification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use App\Enums\UserStatus;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
+
 class AuthService
 {
 
@@ -18,6 +20,25 @@ class AuthService
     {
 
         return DB::transaction(function () use ($data){
+
+            $existingUser = User::where('email',$data['email'])->first();
+
+            if($existingUser)
+            {
+                if ($existingUser->email_verified_at)
+                {
+                    throw ValidationException::withMessages([
+                        'email' => [ __('auth.email_exists') ]
+                    ]);
+                }
+
+                $this->createVerificationOtp($existingUser);
+
+                return [
+                    'user' => $existingUser,
+                ];
+            }
+
 
             $user = User::create([
 
@@ -29,22 +50,17 @@ class AuthService
 
                 'password'=>$data['password'],
 
-                'status' => UserStatus::ACTIVE,
+                'status' => UserStatus::PENDING,
 
             ]);
 
 
             $user->assignRole('renter');
 
-
-            $token = $user->createToken(
-                'auth-token'
-            )->plainTextToken;
-
+            $this->createVerificationOtp($user);
 
             return [
-                'user'=>$user,
-                'token'=>$token
+                'user'=>$user
             ];
         });
 
@@ -250,6 +266,82 @@ class AuthService
 
         ]);
 
+    }
+
+    public function verifyEmail(array $data): void
+    {
+        $verification = EmailVerification::where('email', $data['email'])->latest()->first();
+
+        if (!$verification) {
+
+            throw ValidationException::withMessages([
+                'otp' => [ __('auth.invalid_otp') ]
+            ]);
+
+        }
+
+        if ($verification->verified) {
+
+            throw ValidationException::withMessages([
+                'email' => [ __('auth.email_already_verified')]
+            ]);
+
+        }
+
+        if ($verification->expires_at->isPast()) {
+
+            throw ValidationException::withMessages([
+
+                'otp' => [ __('auth.expired_otp') ]
+
+            ]);
+
+        }
+
+        if ($verification->otp != $data['otp']) {
+
+            throw ValidationException::withMessages([
+
+                'otp' => [ __('auth.invalid_otp') ]
+
+            ]);
+
+        }
+
+        $user = User::where('email', $data['email'])->first();
+
+        if(!$user){
+            throw ValidationException::withMessages([
+                'email'=>[
+                    __('auth.user_not_found')
+                ]
+            ]);
+        }
+
+        $user->update([
+            'email_verified_at' => now() ,
+            'status' => UserStatus::ACTIVE
+        ]);
+
+        $verification->update([ 'verified'=>true ]);
+
+    }
+
+
+    private function createVerificationOtp(User $user): EmailVerification
+    {
+        EmailVerification::where('email', $user->email)->delete();
+
+
+        return EmailVerification::create([
+
+            'email' => $user->email,
+
+            'otp' => random_int(100000, 999999),
+
+            'expires_at' => now()->addMinutes(10),
+
+        ]);
     }
 
 }

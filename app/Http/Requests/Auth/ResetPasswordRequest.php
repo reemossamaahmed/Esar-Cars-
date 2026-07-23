@@ -25,7 +25,7 @@ class ResetPasswordRequest extends FormRequest
 
             'otp' => [
                 'required',
-                'string',
+                'digits:6',
             ],
 
 

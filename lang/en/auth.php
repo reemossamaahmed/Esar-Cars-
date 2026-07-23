@@ -12,6 +12,15 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+
+    'user_not_found' => 'User not found.',
+
+    'email_exists' => 'The email address has already been registered.',
+
+    'email_verified' => 'Email verified successfully.',
+
+    'email_already_verified' => 'Email is already verified.',
+
     'invalid_otp'=>'Invalid OTP.',
 
     'expired_otp'=>'OTP has expired.',
@@ -22,7 +31,7 @@ return [
 
     'email_not_found' => 'Email does not exist.',
 
-    'register_success' => 'Registered successfully',
+    'register_success' => 'Account created successfully, please verify your email.',
 
     'login_success' => 'Login successfully',
 

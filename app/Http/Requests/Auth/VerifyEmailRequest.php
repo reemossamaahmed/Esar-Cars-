@@ -5,7 +5,7 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class VerifyEmailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,40 +15,18 @@ class RegisterRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'string',
-                'max:255'
-            ],
-
-
-            'phone' => [
-                'nullable',
-                'string',
-                'max:20'
-            ],
-
-
             'email' => [
                 'required',
                 'email',
             ],
 
-
-            'password' => [
+            'otp' => [
                 'required',
-                'string',
-                'min:8',
+                'digits:6',
             ],
-
         ];
     }
 
@@ -56,7 +34,13 @@ class RegisterRequest extends FormRequest
     {
         return [
 
-            'password.min' => __('auth.password_min'),
+            'email.required' => __('validation.email_required'),
+
+            'email.email' => __('validation.email_invalid'),
+
+            'otp.required' => __('validation.otp_required'),
+
+            'otp.digits' => __('validation.otp_digits'),
 
         ];
     }

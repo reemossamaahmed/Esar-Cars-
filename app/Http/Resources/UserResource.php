@@ -34,6 +34,7 @@ class UserResource extends JsonResource
 
             'status'=>$this->status,
 
+            'email_verified_at' => $this->email_verified_at,
 
             'created_at'=>$this->created_at,
         ];

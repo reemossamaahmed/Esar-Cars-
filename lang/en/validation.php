@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'otp_digits' => 'OTP must be 6 digits.',
     'expired_otp'=>'OTP has expired.',
     'otp_required' => 'OTP is required.',
     'email_required' => 'Email is required.',

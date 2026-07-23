@@ -13,6 +13,11 @@ return [
     |
     */
 
+    'current_password_required' => 'كلمة المرور الحالية مطلوبة.',
+    'password_required' => 'كلمة المرور الجديدة مطلوبة.',
+    'password_min' => 'كلمة المرور يجب ألا تقل عن :min أحرف.',
+    'password_confirmed' => 'تأكيد كلمة المرور غير متطابق.',
+    'password_different' => 'كلمة المرور الجديدة يجب أن تكون مختلفة عن الحالية.',
     'failed' => 'يوجد أخطاء في البيانات المدخلة.',
     'accepted' => 'يجب الموافقة على :attribute.',
     'accepted_if' => 'يجب الموافقة على :attribute عندما تكون قيمة :other هي :value.',

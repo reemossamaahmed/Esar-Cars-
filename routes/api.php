@@ -18,6 +18,7 @@ Route::prefix('v1')->group(function(){
             Route::post('/logout','logout');
             Route::get('/profile','showProfile');
             Route::put('/profile', 'updateProfile');
+            Route::put('/change-password','changePassword');
         });
 
     });

@@ -28,6 +28,10 @@ return [
 
     'profile_updated' => 'Profile updated successfully.',
 
+    'invalid_current_password' => 'Current password is incorrect.',
+    
+    'password_changed' => 'Password changed successfully.',
+
     'account_disabled' => 'Your account is not active. Please contact support.',
 
     'email_required'=>'Email is required.',

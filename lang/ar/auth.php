@@ -35,6 +35,8 @@ return [
     'unauthenticated' => 'يجب تسجيل الدخول أولاً.',
 
     'profile_updated' => 'تم تحديث الملف الشخصي بنجاح.',
+    'invalid_current_password' => 'كلمة المرور الحالية غير صحيحة.',
+    'password_changed' => 'تم تغيير كلمة المرور بنجاح.',
 
 
     'failed' => 'These credentials do not match our records.',

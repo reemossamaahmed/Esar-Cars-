@@ -105,4 +105,34 @@ class AuthService
         return $user->refresh();
     }
 
+
+    public function changePassword(User $user, array $data): void
+    {
+
+        if (!Hash::check($data['current_password'], $user->password))
+        {
+
+            throw ValidationException::withMessages([
+
+                'current_password' => [
+                    __('auth.invalid_current_password')
+                ]
+
+            ]);
+
+        }
+
+
+        $user->update([
+
+            'password' => $data['password']
+
+        ]);
+
+
+        // Logout from all devices
+        $user->tokens()->delete();
+
+    }
+
 }

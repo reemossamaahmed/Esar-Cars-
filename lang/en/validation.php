@@ -13,6 +13,11 @@ return [
     |
     */
 
+    'current_password_required' => 'Current password is required.',
+    'password_required' => 'New password is required.',
+    'password_min' => 'Password must be at least :min characters.',
+    'password_confirmed' => 'Password confirmation does not match.',
+    'password_different' => 'New password must be different from current password.',
     'failed' => 'There are validation errors.',
     'accepted' => 'The :attribute field must be accepted.',
     'accepted_if' => 'The :attribute field must be accepted when :other is :value.',

@@ -7,6 +7,7 @@ use App\Services\AuthService;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\UpdateProfileRequest;
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -98,5 +99,19 @@ class AuthController extends Controller
             __('auth.profile_updated')
 
         );
+    }
+
+    public function changePassword(ChangePasswordRequest $request): JsonResponse
+    {
+
+        $this->authService->changePassword(
+            $request->user(),
+            $request->validated()
+        );
+
+
+        return ApiResponse::success(null, __('auth.password_changed')
+        );
+
     }
 }

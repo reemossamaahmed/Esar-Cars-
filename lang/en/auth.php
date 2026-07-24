@@ -12,6 +12,17 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'account_inactive' => 'Your account is inactive.',
+    
+    'account_suspended' => 'Your account has been suspended.',
+
+    'login_successfully' => 'Login successfully',
+
+    'invalid_google_token' => 'Invalid Google token.',
+
+    'google_email_not_found' => 'Unable to retrieve the email address from your Google account.',
+
+    'google_email_not_verified' => 'Your Google email address is not verified.',
 
     'user_not_found' => 'User not found.',
 

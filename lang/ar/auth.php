@@ -12,9 +12,20 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'account_inactive' => 'حسابك غير نشط.',
+    
+    'account_suspended' => 'تم تعليق حسابك.',
+
+    'login_successfully' => 'تم تسجيل الدخول بنجاح',
+
+    'invalid_google_token' => 'رمز تسجيل الدخول عبر Google غير صالح.',
+
+    'google_email_not_found' => 'تعذر الحصول على البريد الإلكتروني من حساب Google.',
+
+    'google_email_not_verified' => 'البريد الإلكتروني في حساب Google غير مُحقق.',
 
     'user_not_found' => 'المستخدم غير موجود.',
-    
+
     'email_exists' => 'البريد الإلكتروني مستخدم بالفعل.',
 
     'email_verified' => 'تم تفعيل البريد الإلكتروني بنجاح.',

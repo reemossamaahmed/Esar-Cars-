@@ -36,14 +36,12 @@ Route::prefix('v1')->group(function(){
 
 
 
-Route::get('/v1/test-locale', function () {
+Route::get('/v1/test-error', function () {
 
-    return [
-        'locale' => app()->getLocale(),
-        'message' => __('auth.unauthenticated')
-    ];
+    throw new Exception('test error');
 
 });
+
 
 
 

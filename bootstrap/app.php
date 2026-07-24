@@ -102,18 +102,23 @@ return Application::configure(basePath: dirname(__DIR__))
 
         });
 
-        $exceptions->render(function (Throwable $e, $request) {
+        $exceptions->render(function (\Throwable $e, $request) {
 
             if (! $request->expectsJson()) {
                 return null;
             }
 
+
+            App::setLocale(
+                $request->header('Accept-Language', config('app.locale'))
+            );
+
+
             report($e);
 
+
             return ApiResponse::error(
-                message: config('app.debug')
-                    ? $e->getMessage()
-                    : __('messages.server_error'),
+                message: __('messages.server_error'),
                 code: 500,
             );
 

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'server_error' => 'Server error occurred.',
 
     'success' => 'Success.',
 

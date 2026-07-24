@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\EmailVerification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use App\Exceptions\BusinessException;
 use App\Enums\UserStatus;
 use App\Models\PasswordOtp;
 use Illuminate\Support\Facades\Hash;
@@ -93,11 +94,10 @@ class AuthService
 
         if ($user->status !== UserStatus::ACTIVE)
         {
-            throw ValidationException::withMessages([
-
-                'email'=>[ __('auth.account_disabled') ]
-
-            ]);
+            throw new BusinessException(
+                __('auth.account_disabled'),
+                403
+            );
         }
 
         $token = $user->createToken('api-token')->plainTextToken;

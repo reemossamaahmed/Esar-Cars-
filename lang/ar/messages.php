@@ -20,6 +20,10 @@ return [
 
     'forbidden' => 'ليس لديك صلاحية.',
 
-    'validation_failed' => 'فشل التحقق من البيانات.'
+    'validation_failed' => 'فشل التحقق من البيانات.',
+
+    'resource_not_found' => 'العنصر المطلوب غير موجود.',
+
+    'route_not_found' => 'المسار المطلوب غير موجود.'
 
 ];

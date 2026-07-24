@@ -6,6 +6,7 @@ use App\Models\User;
 use Google\Client as GoogleClient;
 use Illuminate\Support\Str;
 use App\Enums\UserStatus;
+use App\Exceptions\BusinessException;
 
 class GoogleAuthService
 {
@@ -19,15 +20,15 @@ class GoogleAuthService
         $payload = $client->verifyIdToken($idToken);
 
         if (!$payload) {
-            throw new \Exception(__('auth.invalid_google_token'));
+            throw new BusinessException(__('auth.invalid_google_token'), 401);
         }
 
         if (!isset($payload['email'])) {
-            throw new \Exception(__('auth.google_email_not_found'));
+            throw new BusinessException(__('auth.google_email_not_found'),400);
         }
 
         if (!($payload['email_verified'] ?? false)) {
-            throw new \Exception(__('auth.google_email_not_verified'));
+            throw new BusinessException(__('auth.google_email_not_verified'),403);
         }
 
         return [
@@ -88,13 +89,15 @@ class GoogleAuthService
                 => $this->activateGoogleAccount($user, $googleData),
 
             UserStatus::INACTIVE
-                => throw new \Exception(
-                    __('auth.account_inactive')
+                => throw new BusinessException(
+                    __('auth.account_inactive'),
+                    403
                 ),
 
             UserStatus::SUSPENDED
-                => throw new \Exception(
-                    __('auth.account_suspended')
+                => throw new BusinessException(
+                    __('auth.account_suspended'),
+                    403
                 ),
         };
     }

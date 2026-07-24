@@ -22,4 +22,8 @@ return [
 
     'validation_failed' => 'Validation failed.',
 
+    'resource_not_found' => 'The requested item was not found.',
+
+    'route_not_found' => 'The requested endpoint was not found.',
+
 ];

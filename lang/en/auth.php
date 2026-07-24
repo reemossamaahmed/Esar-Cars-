@@ -12,8 +12,11 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+
+    'unauthorized' => 'You are not authorized to perform this action.',
+
     'account_inactive' => 'Your account is inactive.',
-    
+
     'account_suspended' => 'Your account has been suspended.',
 
     'login_successfully' => 'Login successfully',

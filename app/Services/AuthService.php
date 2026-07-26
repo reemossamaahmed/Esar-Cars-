@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use App\Exceptions\BusinessException;
 use App\Enums\UserStatus;
 use App\Models\PasswordOtp;
+use App\Events\UserRegisteredEvent;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -33,7 +34,8 @@ class AuthService
                     ]);
                 }
 
-                $this->createVerificationOtp($existingUser);
+                $verification = $this->createVerificationOtp($existingUser);
+                event(new UserRegisteredEvent($existingUser,  $verification));
 
                 return [
                     'user' => $existingUser,
@@ -58,7 +60,8 @@ class AuthService
 
             $user->assignRole('renter');
 
-            $this->createVerificationOtp($user);
+            $verification = $this->createVerificationOtp($user);
+            event(new UserRegisteredEvent($user,  $verification));
 
             return [
                 'user'=>$user

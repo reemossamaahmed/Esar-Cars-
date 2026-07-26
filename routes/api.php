@@ -31,16 +31,11 @@ Route::prefix('v1')->group(function(){
         Route::post('/google', [GoogleAuthController::class, 'login']);
     });
 
+    
+
 
 });
 
-
-
-Route::get('/v1/test-error', function () {
-
-    throw new Exception('test error');
-
-});
 
 
 

@@ -10,10 +10,9 @@ use App\Exceptions\BusinessException;
 use App\Enums\UserStatus;
 use App\Models\PasswordOtp;
 use App\Events\UserRegisteredEvent;
+use App\Events\VerificationEmailResentEvent;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-
+use Illuminate\Support\Facades\RateLimiter;
 
 class AuthService
 {
@@ -35,7 +34,7 @@ class AuthService
                 }
 
                 $verification = $this->createVerificationOtp($existingUser);
-                event(new UserRegisteredEvent($existingUser,  $verification));
+                event(new VerificationEmailResentEvent($existingUser,  $verification));
 
                 return [
                     'user' => $existingUser,
@@ -330,11 +329,10 @@ class AuthService
 
     }
 
-    public function resendVerification(array $data): string
+    public function resendVerification(array $data): void
     {
 
         $user = User::where('email',$data['email'])->first();
-
 
         if(!$user){
 
@@ -362,10 +360,28 @@ class AuthService
         }
 
 
+        // Start Rate Limitter
+        $key = 'resend-verification:' . $data['email'];
+
+        if (RateLimiter::tooManyAttempts($key, 3)) {
+
+            throw ValidationException::withMessages([
+
+                'email' => [
+                    __('auth.too_many_requests')
+                ]
+
+            ]);
+
+        }
+        //End Rate Limitter
+
+
         $verification = $this->createVerificationOtp($user);
 
+        RateLimiter::hit($key, 600);
 
-        return $verification->otp;
+        event(new VerificationEmailResentEvent($user, $verification));
 
     }
 

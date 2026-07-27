@@ -28,7 +28,7 @@
 
 <h2 style="color:#1f2937; margin-bottom:20px;">
 
-Welcome to Esar Cars 🚗
+Welcome {{ $user->name }}
 
 </h2>
 

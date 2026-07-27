@@ -13,6 +13,9 @@ return [
     |
     */
 
+
+    'too_many_requests' => 'Too many requests, please try again later.',
+
     'unauthorized' => 'You are not authorized to perform this action.',
 
     'account_inactive' => 'Your account is inactive.',

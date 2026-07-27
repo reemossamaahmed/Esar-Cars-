@@ -165,15 +165,13 @@ class AuthController extends Controller
     public function resendVerification(ResendVerificationRequest $request): JsonResponse
     {
 
-        $result = $this->authService->resendVerification($request->validated());
+        $this->authService->resendVerification($request->validated());
 
 
         return ApiResponse::success(
 
-            [
-                'otp'=>$result
-            ],
-
+            null,
+            
             __('auth.otp_sent'),
 
             200

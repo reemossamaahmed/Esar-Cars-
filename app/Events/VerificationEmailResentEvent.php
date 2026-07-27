@@ -8,7 +8,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 
-class UserRegisteredEvent implements ShouldHandleEventsAfterCommit
+class VerificationEmailResentEvent implements ShouldHandleEventsAfterCommit
 {
     use Dispatchable, SerializesModels;
 

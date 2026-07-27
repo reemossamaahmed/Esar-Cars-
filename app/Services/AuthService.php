@@ -11,6 +11,7 @@ use App\Enums\UserStatus;
 use App\Models\PasswordOtp;
 use App\Events\UserRegisteredEvent;
 use App\Events\VerificationEmailResentEvent;
+use App\Events\PasswordResetRequestedEvent;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 
@@ -158,6 +159,22 @@ class AuthService
 
     public function forgotPassword(array $data): void
     {
+
+        $key = 'forgot-password:' . $data['email'];
+
+
+        if (RateLimiter::tooManyAttempts($key, 3)) {
+
+            throw ValidationException::withMessages([
+
+                'email' => [
+                    __('auth.too_many_requests')
+                ]
+
+            ]);
+
+        }
+
         $user = User::where('email', $data['email'])->first();
 
 
@@ -184,18 +201,24 @@ class AuthService
 
 
 
-        // Store OTP hashed
-        PasswordOtp::create([
+        // Store OTP
+        $passwordOtp = PasswordOtp::create([
 
             'email' => $data['email'],
-
-            // 'otp' => Hash::make($otp),
 
             'otp' => $otp,
 
             'expires_at' => now()->addMinutes(10),
 
         ]);
+
+        RateLimiter::hit($key, 600);
+
+        // Send email using Event
+        event(new PasswordResetRequestedEvent(
+            $user,
+            $passwordOtp
+        ));
 
     }
 

@@ -86,6 +86,17 @@ class AuthService
             ]);
         }
 
+        if($user && !$user->has_password)
+        {
+            throw ValidationException::withMessages([
+
+                'email'=>[
+                    __('auth.google_login_required')
+                ]
+
+            ]);
+        }
+
 
 
         if(!Hash::check($data['password'],$user->password))

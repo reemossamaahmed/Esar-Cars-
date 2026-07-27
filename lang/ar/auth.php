@@ -12,6 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'google_login_required' => 'هذا الحساب مسجل باستخدام Google، يرجى تسجيل الدخول عبر Google.',
 
     'cannot_set_password' => 'لا يمكن إنشاء كلمة مرور لهذا الحساب.',
 

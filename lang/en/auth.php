@@ -12,6 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'google_login_required' => 'This account uses Google login, please sign in with Google.',
 
     'cannot_set_password' => 'You cannot set a password for this account.',
 

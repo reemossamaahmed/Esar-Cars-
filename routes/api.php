@@ -25,13 +25,14 @@ Route::prefix('v1')->group(function(){
                 Route::get('/profile','showProfile');
                 Route::put('/profile', 'updateProfile');
                 Route::put('/change-password','changePassword');
+                Route::post('/set-password', 'setPassword');
             });
         });
 
         Route::post('/google', [GoogleAuthController::class, 'login']);
     });
 
-    
+
 
 
 });

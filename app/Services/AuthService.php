@@ -53,6 +53,8 @@ class AuthService
 
                 'password'=>$data['password'],
 
+                'has_password' => true,
+
                 'status' => UserStatus::PENDING,
 
             ]);
@@ -184,6 +186,18 @@ class AuthService
 
                 'email' => [
                     __('auth.email_not_found')
+                ]
+
+            ]);
+
+        }
+
+        if (!$user->has_password) {
+
+            throw ValidationException::withMessages([
+
+                'email' => [
+                    __('auth.google_account')
                 ]
 
             ]);
@@ -421,6 +435,42 @@ class AuthService
             'otp' => random_int(100000, 999999),
 
             'expires_at' => now()->addMinutes(10),
+
+        ]);
+    }
+
+    public function setPassword(User $user, array $data): void
+    {
+
+        if ($user->has_password) {
+
+            throw ValidationException::withMessages([
+
+                'password' => [
+                    __('auth.password_already_set')
+                ]
+
+            ]);
+
+        }
+
+        if ($user->provider !== 'google') {
+
+            throw ValidationException::withMessages([
+
+                'password' => [
+                    __('auth.cannot_set_password')
+                ]
+
+            ]);
+
+        }
+
+        $user->update([
+
+            'password' => $data['password'],
+
+            'has_password' => true,
 
         ]);
     }

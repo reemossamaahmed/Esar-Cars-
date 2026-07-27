@@ -117,6 +117,8 @@ class GoogleAuthService
 
             'password' => Str::random(32),
 
+            'has_password' => false,
+
             'google_id' => $googleData['google_id'],
 
             'provider' => 'google',

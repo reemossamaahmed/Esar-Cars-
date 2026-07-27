@@ -12,6 +12,7 @@ use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Requests\Auth\VerifyEmailRequest;
 use App\Http\Requests\Auth\ResendVerificationRequest;
+use App\Http\Requests\Auth\SetPasswordRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -171,13 +172,29 @@ class AuthController extends Controller
         return ApiResponse::success(
 
             null,
-            
+
             __('auth.otp_sent'),
 
             200
 
         );
 
+    }
+
+    public function setPassword(SetPasswordRequest $request): JsonResponse
+    {
+        $user = auth('api')->user();
+
+        $this->authService->setPassword(
+            $user,
+            $request->validated()
+        );
+
+
+        return ApiResponse::success(
+            null,
+            __('auth.password_set_success')
+        );
     }
 
 

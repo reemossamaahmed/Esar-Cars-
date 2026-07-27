@@ -13,6 +13,13 @@ return [
     |
     */
 
+    'cannot_set_password' => 'You cannot set a password for this account.',
+
+    'google_account' => 'This account uses Google login. Please set a password first.',
+
+    'password_set_success' => 'Password has been set successfully.',
+
+    'password_already_set' => 'Password already exists, use change password.',
 
     'too_many_requests' => 'Too many requests, please try again later.',
 

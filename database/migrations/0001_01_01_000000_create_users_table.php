@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->enum('status', ['active','inactive','suspended','pending'])->default('active');
             $table->string('password');
+            $table->boolean('has_password')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

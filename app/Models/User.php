@@ -20,6 +20,7 @@ class User extends Authenticatable
         'google_id',
         'provider',
         'password',
+        'has_password',
         'avatar',
         'city',
         'status',
@@ -45,6 +46,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'has_password' => 'boolean',
             'password' => 'hashed',
             'status' => UserStatus::class,
         ];

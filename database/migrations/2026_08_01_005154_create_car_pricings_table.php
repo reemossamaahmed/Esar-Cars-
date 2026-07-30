@@ -36,7 +36,6 @@ return new class extends Migration
             $table->decimal('monthly_price', 10, 2)
                 ->nullable();
 
-
             /*
             |--------------------------------------------------------------------------
             | Payment
@@ -55,16 +54,6 @@ return new class extends Migration
 
             $table->boolean('instant_booking_enabled')
                 ->default(false);
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Currency
-            |--------------------------------------------------------------------------
-            */
-
-            $table->string('currency', 3)
-                ->default('SAR');
 
 
             $table->timestamps();

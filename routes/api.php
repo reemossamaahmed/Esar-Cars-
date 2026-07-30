@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\GoogleAuthController;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\CarDocumentController;
+use App\Http\Controllers\Api\CarPricingController;
+use App\Http\Controllers\Api\CarCustomPriceController;
 
 
 Route::prefix('v1')->group(function(){
@@ -39,29 +41,11 @@ Route::prefix('v1')->group(function(){
 
         Route::patch('/cars/{car}/documents',[CarDocumentController::class, 'update']);
 
+        Route::patch('/cars/{car}/pricing', [CarPricingController::class,'update']);
+
+        Route::post('/cars/{car}/custom-pricing',[CarCustomPriceController::class, 'store']);
+
     });
-
-
-
-
-
-
-
-    // Route::middleware(['auth:sanctum','role:owner'])->prefix('car')->controller(CarController::class)->group(function(){
-
-        // Route::post('/','store');
-
-    //     Route::patch('/{car}/location', 'location');
-
-    //     Route::patch('/{car}/documents', 'documents');
-
-    //     Route::patch('/{car}/pricing','pricing');
-
-    //     Route::patch('/{car}/images','images');
-
-    //     Route::post('/{car}/publish','publish');
-
-    // });
 
 
 

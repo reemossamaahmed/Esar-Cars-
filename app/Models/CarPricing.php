@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CarPricing extends Model
 {
@@ -20,8 +19,6 @@ class CarPricing extends Model
         'down_payment',
 
         'instant_booking_enabled',
-
-        'currency',
 
     ];
 
@@ -41,7 +38,7 @@ class CarPricing extends Model
     ];
 
 
-    public function car(): BelongsTo
+    public function car()
     {
         return $this->belongsTo(Car::class);
     }

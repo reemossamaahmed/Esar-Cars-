@@ -19,4 +19,10 @@ return [
     'availability_saved' => 'Availability saved successfully.',
 
     'car_published' => 'Car published successfully.',
+
+    'pricing_updated' => 'Car pricing updated successfully.',
+
+    'custom_price_created' => 'Custom price added successfully.',
+
+    'custom_price_overlap' => 'The selected period overlaps with an existing custom price.',
 ];

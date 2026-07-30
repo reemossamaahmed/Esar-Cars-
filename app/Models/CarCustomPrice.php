@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Enums\CustomPriceReason;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 
 class CarCustomPrice extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Mass Assignment
+    |--------------------------------------------------------------------------
+    */
 
     protected $fillable = [
 
@@ -17,12 +21,19 @@ class CarCustomPrice extends Model
 
         'date_to',
 
-        'price',
+        'daily_price',
 
         'reason',
 
     ];
 
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Casts
+    |--------------------------------------------------------------------------
+    */
 
     protected $casts = [
 
@@ -30,14 +41,22 @@ class CarCustomPrice extends Model
 
         'date_to' => 'date',
 
-        'price' => 'decimal:2',
+        'daily_price' => 'decimal:2',
+
+        'reason' => CustomPriceReason::class,
 
     ];
 
 
-    public function car(): BelongsTo
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    public function car()
     {
         return $this->belongsTo(Car::class);
     }
-
 }

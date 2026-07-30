@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CarDiscountRule extends Model
 {
@@ -16,8 +15,6 @@ class CarDiscountRule extends Model
 
         'discount_percent',
 
-        'is_active',
-
     ];
 
 
@@ -25,12 +22,10 @@ class CarDiscountRule extends Model
 
         'discount_percent' => 'decimal:2',
 
-        'is_active' => 'boolean',
-
     ];
 
 
-    public function car(): BelongsTo
+    public function car()
     {
         return $this->belongsTo(Car::class);
     }

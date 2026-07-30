@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('car_discount_rules', function (Blueprint $table) {
             $table->id();
+
             $table->foreignUuid('car_id')
                 ->constrained()
                 ->cascadeOnUpdate()
@@ -24,10 +25,9 @@ return new class extends Migration
 
             $table->decimal('discount_percent',5,2);
 
-
-            $table->boolean('is_active')->default(true);
-
             $table->timestamps();
+
+            $table->index('car_id');
         });
     }
 

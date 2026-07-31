@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('owner_id')
                 ->constrained('users')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->restrictOnDelete();
 
             // References
             $table->foreignId('brand_id')
@@ -81,7 +81,7 @@ return new class extends Migration
 
             // Rating
             $table->unsignedInteger('rating_count')->default(0);
-            
+
             $table->decimal('rating_avg', 3, 2)->default(0);
 
             $table->timestamp('published_at')->nullable();

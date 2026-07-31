@@ -31,6 +31,8 @@ class Car extends Model
 
         'car_type_id',
 
+        'slug',
+
         'year',
 
         'chassis_number',
@@ -59,7 +61,7 @@ class Car extends Model
 
         'rating_avg',
 
-
+        'published_at',
     ];
 
     /**
@@ -78,6 +80,8 @@ class Car extends Model
         'status' => CarStatus::class,
 
         'transmission' => TransmissionType::class,
+
+        'published_at' => 'date',
 
     ];
 
@@ -121,6 +125,7 @@ class Car extends Model
     {
         return $this->hasOne(CarDocument::class);
     }
+    
 
     public function pricing()
     {

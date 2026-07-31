@@ -6,43 +6,41 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarDocument extends Model
 {
+    /**
+     * Mass Assignment
+     */
     protected $fillable = [
 
         'car_id',
 
-        // Owner identity
-        'owner_id_number',
-        'owner_issue_date',
-        'owner_expiry_date',
-        'owner_front_image_url',
-        'owner_back_image_url',
+        'license_number',
 
-        // Registration
-        'plate_number',
-        'registration_issue_date',
-        'registration_expiry_date',
-        'registration_front_image_url',
-        'registration_back_image_url',
+        'insurance_policy_number',
 
-        // Verification
-        'verification_status',
-        'rejection_reason',
+        'issue_date',
+
+        'expiry_date',
+
+        'vehicle_document_url',
 
     ];
 
-
+    /**
+     * Casts
+     */
     protected $casts = [
 
-        'owner_issue_date' => 'date',
+        'issue_date'  => 'date',
 
-        'owner_expiry_date' => 'date',
-
-        'registration_issue_date' => 'date',
-
-        'registration_expiry_date' => 'date',
+        'expiry_date' => 'date',
 
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     public function car()
     {

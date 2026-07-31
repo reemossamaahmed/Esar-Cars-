@@ -21,54 +21,38 @@ return new class extends Migration
 
             /*
             |--------------------------------------------------------------------------
-            | Owner Identity
+            | Registration
             |--------------------------------------------------------------------------
             */
 
-            $table->string('owner_id_number');
+            $table->string('license_number');
 
-            $table->date('owner_issue_date');
+            $table->string('insurance_policy_number');
 
-            $table->date('owner_expiry_date');
+            $table->date('issue_date');
 
-            $table->string('owner_front_image_url');
+            $table->date('expiry_date');
 
-            $table->string('owner_back_image_url');
-            /*
-            |--------------------------------------------------------------------------
-            | Car Registration
-            |--------------------------------------------------------------------------
-            */
-            $table->string('plate_number');
-
-            $table->date('registration_issue_date');
-
-            $table->date('registration_expiry_date');
-
-            $table->string('registration_front_image_url');
-
-            $table->string('registration_back_image_url');
 
             /*
             |--------------------------------------------------------------------------
-            | Verification
+            | File
             |--------------------------------------------------------------------------
             */
-            $table->enum('verification_status', [
 
-                'pending',
-
-                'approved',
-
-                'rejected',
-
-            ])->default('pending');
-
-            $table->text('rejection_reason')->nullable();
+            $table->string('vehicle_document_url');
 
             $table->timestamps();
 
+            /*
+            |--------------------------------------------------------------------------
+            | Indexes
+            |--------------------------------------------------------------------------
+            */
+
             $table->unique('car_id');
+
+            $table->index('license_number');
 
         });
     }

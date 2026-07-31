@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\GoogleAuthController;
-
+use App\Http\Controllers\Api\CarController;
+use App\Http\Controllers\Api\CarDocumentController;
 
 
 Route::prefix('v1')->group(function(){
@@ -31,6 +32,40 @@ Route::prefix('v1')->group(function(){
 
         Route::post('/google', [GoogleAuthController::class, 'login']);
     });
+
+    Route::middleware(['auth:sanctum', 'role:owner'])->prefix('owner')->group(function () {
+
+        Route::post('/cars',[CarController::class, 'store']);
+
+        Route::patch('/cars/{car}/documents',[CarDocumentController::class, 'update']);
+
+    });
+
+
+
+
+
+
+
+    // Route::middleware(['auth:sanctum','role:owner'])->prefix('car')->controller(CarController::class)->group(function(){
+
+        // Route::post('/','store');
+
+    //     Route::patch('/{car}/location', 'location');
+
+    //     Route::patch('/{car}/documents', 'documents');
+
+    //     Route::patch('/{car}/pricing','pricing');
+
+    //     Route::patch('/{car}/images','images');
+
+    //     Route::post('/{car}/publish','publish');
+
+    // });
+
+
+
+
 
 
 

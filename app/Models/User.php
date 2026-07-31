@@ -51,4 +51,9 @@ class User extends Authenticatable
             'status' => UserStatus::class,
         ];
     }
+
+    public function ownerDocument()
+    {
+        return $this->hasOne(OwnerDocument::class);
+    }
 }

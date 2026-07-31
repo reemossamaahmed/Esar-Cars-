@@ -11,6 +11,10 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Spatie\Permission\Middleware\RoleMiddleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,6 +25,17 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->api([\App\Http\Middleware\SetLocale::class,]);
+
+        $middleware->alias([
+
+        'role' => RoleMiddleware::class,
+
+        'permission' => PermissionMiddleware::class,
+
+        'role_or_permission' => RoleOrPermissionMiddleware::class,
+
+    ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
 
@@ -60,6 +75,19 @@ return Application::configure(basePath: dirname(__DIR__))
                 __('auth.unauthenticated'),
                 401
             );
+
+        });
+
+        $exceptions->render(function (UnauthorizedException $e, $request) {
+
+            if ($request->expectsJson()) {
+
+                return ApiResponse::error(
+                    message: __('auth.unauthorized'),
+                    code: 403,
+                );
+
+            }
 
         });
 

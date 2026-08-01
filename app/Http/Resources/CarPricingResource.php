@@ -7,19 +7,80 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CarPricingResource extends JsonResource
 {
+    /**
+     * Transform the resource into an array.
+     */
     public function toArray(Request $request): array
     {
         return [
 
-            'daily_price' => $this->daily_price,
+            'id' => $this->id,
 
-            'weekly_price' => $this->weekly_price,
+
+            /*
+            |--------------------------------------------------------------------------
+            | Prices
+            |--------------------------------------------------------------------------
+            */
+
+            'daily_price' => $this->daily_price,
 
             'monthly_price' => $this->monthly_price,
 
-            'down_payment' => $this->down_payment,
+            'yearly_price' => $this->yearly_price,
 
-            'instant_booking_enabled' => $this->instant_booking_enabled,
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Booking
+            |--------------------------------------------------------------------------
+            */
+
+            'instant_booking_enabled'
+                => $this->instant_booking_enabled,
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Deposit
+            |--------------------------------------------------------------------------
+            */
+
+            'deposit' => [
+
+                'title'
+                    => $this->deposit_title,
+
+                'description'
+                    => $this->deposit_description,
+
+                'price'
+                    => $this->deposit_price,
+
+            ],
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Offers
+            |--------------------------------------------------------------------------
+            */
+
+            'discount_rules'
+                => $this->whenLoaded(
+                    'discountRules'
+                ),
+
+
+
+            'created_at'
+                => $this->created_at,
+
+            'updated_at'
+                => $this->updated_at,
 
         ];
     }

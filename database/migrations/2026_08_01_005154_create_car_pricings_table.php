@@ -17,6 +17,7 @@ return new class extends Migration
 
 
             $table->foreignUuid('car_id')
+                ->unique()
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
@@ -30,20 +31,11 @@ return new class extends Migration
 
             $table->decimal('daily_price', 10, 2);
 
-            $table->decimal('weekly_price', 10, 2)
-                ->nullable();
-
             $table->decimal('monthly_price', 10, 2)
                 ->nullable();
 
-            /*
-            |--------------------------------------------------------------------------
-            | Payment
-            |--------------------------------------------------------------------------
-            */
-
-            $table->decimal('down_payment', 10, 2)
-                ->default(0);
+            $table->decimal('yearly_price', 10, 2)
+                ->nullable();
 
 
             /*
@@ -55,11 +47,23 @@ return new class extends Migration
             $table->boolean('instant_booking_enabled')
                 ->default(false);
 
+            /*
+            |--------------------------------------------------------------------------
+            | Deposit
+            |--------------------------------------------------------------------------
+            */
+
+            $table->string('deposit_title')
+                ->nullable();
+
+            $table->text('deposit_description')
+                ->nullable();
+
+            $table->decimal('deposit_price', 10, 2)
+                ->nullable();
+
 
             $table->timestamps();
-
-
-            $table->unique('car_id');
 
         });
     }

@@ -16,15 +16,14 @@ class UpdateCarPricingRequest extends FormRequest
     {
         return [
 
+            /*
+            |--------------------------------------------------------------------------
+            | Base Prices
+            |--------------------------------------------------------------------------
+            */
+
             'daily_price' => [
                 'required',
-                'numeric',
-                'min:0',
-            ],
-
-
-            'weekly_price' => [
-                'nullable',
                 'numeric',
                 'min:0',
             ],
@@ -37,17 +36,58 @@ class UpdateCarPricingRequest extends FormRequest
             ],
 
 
-            'down_payment' => [
+            'yearly_price' => [
                 'nullable',
                 'numeric',
                 'min:0',
             ],
 
 
+            /*
+            |--------------------------------------------------------------------------
+            | Instant Booking
+            |--------------------------------------------------------------------------
+            */
+
             'instant_booking_enabled' => [
-                'required',
+                'nullable',
                 'boolean',
             ],
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Deposit
+            |--------------------------------------------------------------------------
+            */
+
+            'deposit' => [
+                'nullable',
+                'array',
+            ],
+
+
+            'deposit.title' => [
+                'required_with:deposit',
+                'string',
+                'max:255',
+            ],
+
+
+            'deposit.description' => [
+                'nullable',
+                'string',
+            ],
+
+
+            'deposit.price' => [
+                'required_with:deposit',
+                'numeric',
+                'min:0',
+            ],
+
+
 
             /*
             |--------------------------------------------------------------------------
@@ -61,19 +101,34 @@ class UpdateCarPricingRequest extends FormRequest
             ],
 
 
-            'discount_rules.*.min_days' => [
+            'discount_rules.*.title' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+
+
+            'discount_rules.*.total_price' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+
+
+            'discount_rules.*.from_days' => [
                 'required',
                 'integer',
                 'min:1',
             ],
 
 
-            'discount_rules.*.discount_percent' => [
+            'discount_rules.*.to_days' => [
                 'required',
-                'numeric',
-                'min:0',
-                'max:100',
+                'integer',
+                'gte:discount_rules.*.from_days',
             ],
+
+            
 
         ];
     }

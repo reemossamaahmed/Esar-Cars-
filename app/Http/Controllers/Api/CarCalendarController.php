@@ -3,22 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Car\UpdateCarPricingRequest;
-use App\Http\Resources\CarPricingResource;
 use App\Http\Responses\ApiResponse;
 use App\Models\Car;
-use App\Services\Car\UpdateCarPricingService;
+use App\Services\Car\GetCarCalendarService;
+use Illuminate\Http\Request;
 
-class CarPricingController extends Controller
+class CarCalendarController extends Controller
 {
 
-    public function __construct(private UpdateCarPricingService $updateCarPricingService)
-    {
+    public function __construct(
+        private GetCarCalendarService $calendarService
+    ) {
     }
 
 
 
-    public function update(UpdateCarPricingRequest $request, Car $car) {
+    public function index(
+        Request $request,
+        Car $car
+    ) {
 
         /*
         |--------------------------------------------------------------------------
@@ -32,25 +35,25 @@ class CarPricingController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Update Pricing
+        | Get Calendar
         |--------------------------------------------------------------------------
         */
 
-        $pricing = $this->updateCarPricingService->update(
+        $calendar = $this->calendarService->get(
+
             $car,
-            $request->validated()
+
+            $request->integer('month'),
+
+            $request->integer('year')
+
         );
 
 
 
         return ApiResponse::success(
-
-            new CarPricingResource($pricing),
-
-            __('car.pricing_updated')
-
+            $calendar
         );
 
     }
-
 }

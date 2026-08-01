@@ -25,4 +25,6 @@ return [
     'custom_price_created' => 'Custom price added successfully.',
 
     'custom_price_overlap' => 'The selected period overlaps with an existing custom price.',
+
+    'discount_conflict' => 'There is a conflict between the discount periods.',
 ];

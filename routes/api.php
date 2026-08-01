@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\CarDocumentController;
 use App\Http\Controllers\Api\CarPricingController;
 use App\Http\Controllers\Api\CarCustomPriceController;
+use App\Http\Controllers\Api\CarCalendarController;
 
 
 Route::prefix('v1')->group(function(){
@@ -43,9 +44,15 @@ Route::prefix('v1')->group(function(){
 
         Route::patch('/cars/{car}/pricing', [CarPricingController::class,'update']);
 
-        Route::post('/cars/{car}/custom-pricing',[CarCustomPriceController::class, 'store']);
+
+        // Route::post('/cars/{car}/custom-pricing',[CarCustomPriceController::class, 'store']);
+
+        // Route::get('/cars/{car}/calendar',[CarCalendarController::class, 'index']);
+
 
     });
+
+
 
 
 

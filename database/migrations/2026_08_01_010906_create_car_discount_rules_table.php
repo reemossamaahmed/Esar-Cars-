@@ -14,20 +14,26 @@ return new class extends Migration
         Schema::create('car_discount_rules', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignUuid('car_id')
+
+            $table->foreignId('car_pricing_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
 
-            $table->unsignedInteger('min_days');
+            $table->string('title');
 
 
-            $table->decimal('discount_percent',5,2);
+            $table->decimal('total_price', 10, 2);
+
+
+            $table->unsignedSmallInteger('from_days');
+
+
+            $table->unsignedSmallInteger('to_days');
+
 
             $table->timestamps();
-
-            $table->index('car_id');
         });
     }
 

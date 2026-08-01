@@ -9,25 +9,28 @@ class CarDiscountRule extends Model
 
     protected $fillable = [
 
-        'car_id',
+        'car_pricing_id',
 
-        'min_days',
+        'title',
 
-        'discount_percent',
+        'total_price',
+
+        'from_days',
+
+        'to_days',
 
     ];
 
 
     protected $casts = [
 
-        'discount_percent' => 'decimal:2',
+        'total_price' => 'decimal:2',
 
     ];
 
 
-    public function car()
+    public function pricing()
     {
-        return $this->belongsTo(Car::class);
+        return $this->belongsTo(CarPricing::class, 'car_pricing_id');
     }
-
 }

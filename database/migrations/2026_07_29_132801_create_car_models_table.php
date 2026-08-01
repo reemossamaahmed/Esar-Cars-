@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('car_models', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
 
-            $table->foreignUuid('brand_id')->constrained('brands')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('brand_id')->constrained('brands')->cascadeOnUpdate()->restrictOnDelete();
 
-            $table->string('name');
+            $table->string('name_en');
+
+            $table->string('name_ar');
 
             $table->string('slug');
 
@@ -24,7 +26,9 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->unique(['brand_id', 'name']);
+            $table->unique(['brand_id', 'name_en']);
+
+            $table->unique(['brand_id', 'name_ar']);
 
         });
     }

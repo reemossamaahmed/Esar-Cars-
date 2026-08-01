@@ -3,16 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Feature extends Model
 {
-    use HasUuids;
-
     protected $fillable = [
-        'name',
-        'slug',
-        'icon_url',
+        'name_en',
+        'name_ar',
+        'icon',
         'is_active',
     ];
 
@@ -26,5 +23,10 @@ class Feature extends Model
         return [
             'is_active' => 'boolean',
         ];
+    }
+
+    public function cars()
+    {
+        return $this->belongsToMany(Car::class);
     }
 }

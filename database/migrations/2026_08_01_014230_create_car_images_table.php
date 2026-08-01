@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('car_images', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('car_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
 
+            $table->string('image_url');
 
-            $table->string('name_en')->unique();
+            $table->unsignedInteger('sort_order')->default(0);
 
-            $table->string('name_ar')->unique();
-
-            $table->string('icon')->nullable();
-
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_primary')->default(false);
 
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('features');
+        Schema::dropIfExists('car_images');
     }
 };

@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
-
 
             $table->string('name_en')->unique();
 
             $table->string('name_ar')->unique();
 
-            $table->string('icon')->nullable();
+            $table->string('country');
 
             $table->boolean('is_active')->default(true);
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('features');
+        Schema::dropIfExists('cities');
     }
 };

@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('brands', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
 
-            $table->string('name')->unique();
+            $table->string('name_ar')->unique();
+
+            $table->string('name_en')->unique();
 
             $table->string('slug')->unique();
 
@@ -23,6 +25,8 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();
+
+
         });
     }
 

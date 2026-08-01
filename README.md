@@ -339,11 +339,11 @@ php artisan migrate
 
 ---
 
-## 6. Create Storage Link
+## 6. Create Seeder
 
 
 ```bash
-php artisan storage:link
+php artisan db:seed
 ```
 
 

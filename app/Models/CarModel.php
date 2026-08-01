@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 
 class CarModel extends Model
 {
-    use HasUuids;
 
     protected $fillable = [
         'brand_id',
-        'name',
+        'name_en',
+        'name_ar',
         'slug',
         'is_active',
     ];

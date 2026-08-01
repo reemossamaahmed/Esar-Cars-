@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('car_discount_rules', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('car_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
 
 
-            $table->string('name_en')->unique();
+            $table->unsignedInteger('min_days');
 
-            $table->string('name_ar')->unique();
 
-            $table->string('icon')->nullable();
+            $table->decimal('discount_percent',5,2);
+
 
             $table->boolean('is_active')->default(true);
 
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('features');
+        Schema::dropIfExists('car_discount_rules');
     }
 };

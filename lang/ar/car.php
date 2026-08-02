@@ -36,7 +36,16 @@ return [
 
     'exactly_one_cover_required' => 'يجب تحديد صورة غلاف واحدة فقط للسيارة.',
 
-
     'cover_already_exists' => 'السيارة تحتوي بالفعل على صورة غلاف.',
+
+    'policy_text_required' =>  'نص سياسة الإلغاء مطلوب.',
+
+    'days_before_required' => 'عدد أيام الإلغاء مطلوب.',
+
+    'days_before_integer' => 'عدد أيام الإلغاء يجب أن يكون رقم.',
+
+    'policy_already_exists' => 'السيارة لديها سياسة إلغاء بالفعل.',
+
+    'policy_created' => 'تم إضافة سياسة الإلغاء بنجاح.',
 
 ];

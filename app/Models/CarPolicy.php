@@ -10,9 +10,9 @@ class CarPolicy extends Model
 
         'car_id',
 
-        'cancellation_days',
+        'days_before',
 
-        'cancellation_details',
+        'policy_text',
 
     ];
 

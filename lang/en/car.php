@@ -36,7 +36,16 @@ return [
 
     'exactly_one_cover_required' => 'Exactly one cover image is required.',
 
-
     'cover_already_exists' => 'This car already has a cover image.',
+
+    'policy_text_required' => 'Cancellation policy text is required.',
+
+    'days_before_required' => 'Cancellation days are required.',
+
+    'days_before_integer' => 'Cancellation days must be a number.',
+
+    'policy_already_exists' => 'This car already has a cancellation policy.',
+
+    'policy_created' => 'Cancellation policy created successfully.',
 
 ];

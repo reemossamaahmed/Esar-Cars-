@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignUuid('car_id')
+                ->unique()
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
@@ -25,17 +26,14 @@ return new class extends Migration
             | Cancellation Policy
             |--------------------------------------------------------------------------
             */
-            
-            $table->unsignedInteger('cancellation_days')->default(0);
+
+            $table->unsignedInteger('days_before')->default(0);
 
 
-            $table->text('cancellation_details')->nullable();
+            $table->text('policy_text')->nullable();
 
 
             $table->timestamps();
-
-
-            $table->unique('car_id');
         });
     }
 

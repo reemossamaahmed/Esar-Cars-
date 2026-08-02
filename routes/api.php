@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CarPricingController;
 use App\Http\Controllers\Api\CarCustomPriceController;
 use App\Http\Controllers\Api\CarCalendarController;
 use App\Http\Controllers\Api\CarMediaController;
+use App\Http\Controllers\Api\CarCancellationPolicyController;
 
 
 
@@ -53,6 +54,8 @@ Route::prefix('v1')->group(function(){
 
 
         Route::post('/cars/{car}/media', [CarMediaController::class,'store']);
+
+        Route::post('/cars/{car}/cancellation-policy',[CarCancellationPolicyController::class,'store']);
     });
 
 

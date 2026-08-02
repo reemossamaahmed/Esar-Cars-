@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DiscountRuleResource extends JsonResource
+class CarImageResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -13,13 +13,11 @@ class DiscountRuleResource extends JsonResource
 
             'id' => $this->id,
 
-            'title' => $this->title,
+            'image_url' => $this->image_url,
 
-            'total_price' => $this->total_price,
+            'is_cover' => $this->is_cover,
 
-            'from_days' => $this->from_days,
-
-            'to_days' => $this->to_days,
+            'order_index' => $this->order_index,
 
         ];
     }

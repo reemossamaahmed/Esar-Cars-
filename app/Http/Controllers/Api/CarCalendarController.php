@@ -3,57 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Car\CarCalendarRequest;
 use App\Http\Responses\ApiResponse;
 use App\Models\Car;
-use App\Services\Car\GetCarCalendarService;
-use Illuminate\Http\Request;
+use App\Services\Car\CarCalendarService;
 
 class CarCalendarController extends Controller
 {
-
     public function __construct(
-        private GetCarCalendarService $calendarService
+        private readonly CarCalendarService $calendarService
     ) {
     }
 
-
-
     public function index(
-        Request $request,
+        CarCalendarRequest $request,
         Car $car
-    ) {
-
-        /*
-        |--------------------------------------------------------------------------
-        | Authorization
-        |--------------------------------------------------------------------------
-        */
-
-        $this->authorize('update', $car);
-
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Get Calendar
-        |--------------------------------------------------------------------------
-        */
-
-        $calendar = $this->calendarService->get(
-
+    )
+    {
+        $calendar = $this->calendarService->getCalendar(
             $car,
-
-            $request->integer('month'),
-
-            $request->integer('year')
-
+            $request->validated()
         );
-
-
 
         return ApiResponse::success(
-            $calendar
+            $calendar,
+            __('car.calendar_loaded')
         );
-
     }
 }

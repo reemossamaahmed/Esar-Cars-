@@ -84,6 +84,8 @@ return new class extends Migration
 
             $table->decimal('rating_avg', 3, 2)->default(0);
 
+            $table->string('video_url')->nullable();
+
             $table->timestamp('published_at')->nullable();
 
             $table->timestamps();

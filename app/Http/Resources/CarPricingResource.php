@@ -69,18 +69,15 @@ class CarPricingResource extends JsonResource
             |--------------------------------------------------------------------------
             */
 
-            'discount_rules'
-                => $this->whenLoaded(
-                    'discountRules'
+            'discount_rules' =>
+                DiscountRuleResource::collection(
+                    $this->whenLoaded('discountRules')
                 ),
 
 
+            'created_at' => $this->created_at?->format('Y-m-d'),
 
-            'created_at'
-                => $this->created_at,
-
-            'updated_at'
-                => $this->updated_at,
+            'updated_at' => $this->updated_at?->format('Y-m-d'),
 
         ];
     }

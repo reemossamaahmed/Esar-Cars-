@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('car_images', function (Blueprint $table) {
             $table->id();
+
             $table->foreignUuid('car_id')
                 ->constrained()
                 ->cascadeOnUpdate()
@@ -20,11 +21,24 @@ return new class extends Migration
 
             $table->string('image_url');
 
-            $table->unsignedInteger('sort_order')->default(0);
+            $table->unsignedInteger('order_index')->nullable();
 
-            $table->boolean('is_primary')->default(false);
+            $table->boolean('is_cover')->default(false);
 
             $table->timestamps();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Indexes
+            |--------------------------------------------------------------------------
+            */
+
+            $table->index(['car_id']);
+
+            $table->index([
+                'car_id',
+                'order_index'
+            ]);
         });
     }
 

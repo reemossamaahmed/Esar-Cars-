@@ -15,16 +15,16 @@ class CarImage extends Model
 
         'image_url',
 
-        'sort_order',
+        'order_index',
 
-        'is_primary',
+        'is_cover',
 
     ];
 
 
     protected $casts = [
 
-        'is_primary' => 'boolean',
+        'is_cover' => 'boolean',
 
     ];
 

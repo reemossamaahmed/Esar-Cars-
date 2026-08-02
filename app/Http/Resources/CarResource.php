@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\CarImageResource;
 
 class CarResource extends JsonResource
 {
@@ -79,6 +80,13 @@ class CarResource extends JsonResource
 
             'description' => $this->description,
 
+            'video_url' => $this->video_url,
+
+
+            'images' => CarImageResource::collection(
+                $this->whenLoaded('images')
+            ),
+
 
             /*
             |--------------------------------------------------------------------------
@@ -151,7 +159,7 @@ class CarResource extends JsonResource
             ],
 
 
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at?->format('Y-m-d'),
 
         ];
     }

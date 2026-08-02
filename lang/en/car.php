@@ -27,4 +27,16 @@ return [
     'custom_price_overlap' => 'The selected period overlaps with an existing custom price.',
 
     'discount_conflict' => 'There is a conflict between the discount periods.',
+
+    'custom_price_conflict' => 'Custom price period conflicts with existing period.',
+
+    'calendar_loaded' => 'Calendar loaded successfully.',
+
+    'media_added' => 'Car media added successfully.',
+
+    'exactly_one_cover_required' => 'Exactly one cover image is required.',
+
+
+    'cover_already_exists' => 'This car already has a cover image.',
+
 ];

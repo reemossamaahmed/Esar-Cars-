@@ -61,6 +61,8 @@ class Car extends Model
 
         'rating_avg',
 
+        'video_url',
+
         'published_at',
     ];
 
@@ -125,7 +127,7 @@ class Car extends Model
     {
         return $this->hasOne(CarDocument::class);
     }
-    
+
 
     public function pricing()
     {
@@ -142,15 +144,16 @@ class Car extends Model
         return $this->hasMany(CarCustomPrice::class);
     }
 
-    public function availabilities()
-    {
-        return $this->hasMany(CarAvailability::class);
-    }
-
     public function images()
     {
         return $this->hasMany(CarImage::class)
-            ->orderBy('sort_order');
+            ->orderBy('order_index');
+    }
+
+    public function coverImage()
+    {
+        return $this->hasOne(CarImage::class)
+            ->where('is_cover', true);
     }
 
     public function policy()

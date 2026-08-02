@@ -2,100 +2,80 @@
 
 namespace App\Services\Car;
 
-use App\Enums\CustomPriceReason;
-use App\Exceptions\BusinessException;
 use App\Models\Car;
+use App\Models\CarCustomPrice;
 use Illuminate\Support\Facades\DB;
+use App\Exceptions\BusinessException;
 
 class CreateCustomPriceService
 {
 
-    public function create(Car $car, array $data)
-    {
-
-        return DB::transaction(function () use ($car, $data) {
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Check Overlapping Dates
-            |--------------------------------------------------------------------------
-            */
-
-            $exists = $car->customPrices()
-
-                ->where(function ($query) use ($data) {
-
-                    $query
-
-                        ->whereBetween(
-                            'date_from',
-                            [
-                                $data['date_from'],
-                                $data['date_to']
-                            ]
-                        )
-
-                        ->orWhereBetween(
-                            'date_to',
-                            [
-                                $data['date_from'],
-                                $data['date_to']
-                            ]
-                        )
-
-                        ->orWhere(function ($query) use ($data) {
-
-                            $query
-
-                                ->where('date_from', '<=', $data['date_from'])
-
-                                ->where('date_to', '>=', $data['date_to']);
-
-                        });
-
-                })
-
-                ->exists();
+    public function create(
+        Car $car,
+        array $data
+    ): CarCustomPrice {
 
 
-
-            if ($exists) {
-
-                throw new BusinessException(
-
-                    __('car.custom_price_overlap'),
-
-                    422
-
-                );
-
-            }
+        $this->checkConflict(
+            $car,
+            $data
+        );
 
 
+        return DB::transaction(function () use ($car,$data){
 
-            /*
-            |--------------------------------------------------------------------------
-            | Create Custom Price
-            |--------------------------------------------------------------------------
-            */
-
-            $car->customPrices()->create([
+            return $car->customPrices()->create([
 
                 'date_from' => $data['date_from'],
 
                 'date_to' => $data['date_to'],
 
-                'daily_price' => $data['daily_price'],
+                'daily_price' =>
+                    $data['daily_price'] ?? null,
 
-                'reason' => CustomPriceReason::CUSTOM_PRICE,
+                'reason' =>
+                    $data['reason'],
 
             ]);
 
-
-            return $car->load('customPrices');
-
         });
+
+    }
+
+
+
+
+    private function checkConflict( Car $car, array $data): void
+    {
+
+        $exists = $car
+            ->customPrices()
+            ->where(function ($query) use ($data) {
+
+                $query->where(
+                    'date_from',
+                    '<=',
+                    $data['date_to']
+                )
+                ->where(
+                    'date_to',
+                    '>=',
+                    $data['date_from']
+                );
+
+            })
+            ->exists();
+
+
+
+        if ($exists) {
+
+            throw new BusinessException(
+                __('car.custom_price_conflict'),
+                422
+            );
+
+        }
 
     }
 

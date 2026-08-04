@@ -44,15 +44,13 @@ Route::prefix('v1')->group(function(){
         //CREATE CAR MODULE
         Route::post('/cars',[CarController::class, 'store']);
 
-        Route::patch('/cars/{car}/documents',[CarDocumentController::class, 'update']);
+        Route::post('/cars/{car}/documents',[CarDocumentController::class, 'store']);
 
         Route::patch('/cars/{car}/pricing', [CarPricingController::class,'update']);
-
 
         Route::post('/cars/{car}/custom-pricing',[CarCustomPriceController::class, 'store']);
 
         Route::get('/cars/{car}/calendar',[CarCalendarController::class, 'index']);
-
 
         Route::post('/cars/{car}/media', [CarMediaController::class,'store']);
 

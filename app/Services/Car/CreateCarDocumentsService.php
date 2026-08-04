@@ -7,9 +7,9 @@ use App\Models\CarDocument;
 use App\Models\OwnerDocument;
 use Illuminate\Support\Facades\DB;
 
-class UpdateCarDocumentsService
+class CreateCarDocumentsService
 {
-    public function update(Car $car, array $data): Car
+    public function store(Car $car, array $data): Car
     {
         return DB::transaction(function () use ($car, $data) {
 

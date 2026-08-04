@@ -7,15 +7,15 @@ use App\Http\Requests\Car\StoreCarDocumentsRequest;
 use App\Http\Resources\CarResource;
 use App\Http\Responses\ApiResponse;
 use App\Models\Car;
-use App\Services\Car\UpdateCarDocumentsService;
+use App\Services\Car\CreateCarDocumentsService;
 
 class CarDocumentController extends Controller
 {
-    public function __construct(private UpdateCarDocumentsService $updateCarDocumentsService)
+    public function __construct(private CreateCarDocumentsService $createCarDocumentsService)
     {
     }
 
-    public function update(StoreCarDocumentsRequest $request, Car $car)
+    public function store(StoreCarDocumentsRequest $request, Car $car)
     {
 
         /*
@@ -24,7 +24,7 @@ class CarDocumentController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $this->authorize('update', $car);
+        $this->authorize('manageDocuments', $car);
 
 
         /*
@@ -33,7 +33,7 @@ class CarDocumentController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $car = $this->updateCarDocumentsService->update(
+        $car = $this->createCarDocumentsService->store(
             $car,
             $request->validated()
         );

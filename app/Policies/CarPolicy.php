@@ -40,6 +40,11 @@ class CarPolicy
         return $car->owner_id === $user->id;
     }
 
+    public function manageDocuments(User $user, Car $car): bool
+    {
+        return $car->owner_id === $user->id;
+    }
+
     /**
      * Determine whether the user can delete the model.
      */

@@ -48,4 +48,10 @@ return [
 
     'policy_created' => 'Cancellation policy created successfully.',
 
+    'updated_successfully' => 'Car updated successfully.',
+
+    'not_found' => 'Car not found.',
+
+    'unauthorized' => 'You are not allowed to update this car.',
+
 ];

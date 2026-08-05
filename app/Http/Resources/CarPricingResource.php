@@ -14,9 +14,6 @@ class CarPricingResource extends JsonResource
     {
         return [
 
-            'id' => $this->id,
-
-
             /*
             |--------------------------------------------------------------------------
             | Prices

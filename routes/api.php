@@ -41,6 +41,7 @@ Route::prefix('v1')->group(function(){
 
     Route::middleware(['auth:sanctum', 'role:owner'])->prefix('owner')->group(function () {
 
+        //CREATE CAR MODULE
         Route::post('/cars',[CarController::class, 'store']);
 
         Route::patch('/cars/{car}/documents',[CarDocumentController::class, 'update']);
@@ -56,8 +57,10 @@ Route::prefix('v1')->group(function(){
         Route::post('/cars/{car}/media', [CarMediaController::class,'store']);
 
         Route::post('/cars/{car}/cancellation-policy',[CarCancellationPolicyController::class,'store']);
-    });
 
+        //UPDATE CAR MODULE
+        Route::patch('/cars/{car}',[CarController::class,'update']);
+    });
 
 
 

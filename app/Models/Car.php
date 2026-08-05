@@ -113,9 +113,11 @@ class Car extends Model
         return $this->belongsTo(CarType::class);
     }
 
+
     public function features()
     {
-        return $this->belongsToMany(Feature::class);
+        return $this->belongsToMany(Feature::class)
+            ->withTimestamps();
     }
 
     public function location()
@@ -133,12 +135,6 @@ class Car extends Model
     {
         return $this->hasOne(CarPricing::class);
     }
-
-    public function discountRules()
-    {
-        return $this->hasMany(CarDiscountRule::class);
-    }
-
     public function customPrices()
     {
         return $this->hasMany(CarCustomPrice::class);

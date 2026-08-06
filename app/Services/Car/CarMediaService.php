@@ -162,4 +162,75 @@ class CarMediaService
         });
 
     }
+
+    public function update(Car $car, array $data): Car
+    {
+
+        return DB::transaction(function () use ($car, $data) {
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Update Video
+            |--------------------------------------------------------------------------
+            */
+
+            if (array_key_exists('video_url', $data)) {
+
+                $car->update([
+
+                    'video_url' => $data['video_url']
+
+                ]);
+
+            }
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Update Cover Image
+            |--------------------------------------------------------------------------
+            */
+
+            if (isset($data['cover_image'])) {
+
+
+                $coverImage = $car
+                    ->images()
+                    ->where('is_cover', true)
+                    ->first();
+
+
+
+                if (!$coverImage) {
+
+                    throw ValidationException::withMessages([
+
+                        'cover_image' => [
+                            __('car.cover_not_found')
+                        ]
+
+                    ]);
+
+                }
+
+
+
+                $coverImage->update([
+
+                    'image_url' =>
+                        $data['cover_image']['image_url']
+
+                ]);
+
+            }
+
+
+
+            return $car->load('images');
+
+        });
+
+    }
 }

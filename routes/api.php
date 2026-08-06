@@ -62,6 +62,8 @@ Route::prefix('v1')->group(function(){
         Route::patch('/cars/{car}/pricing',[CarPricingController::class,'update']);
 
         Route::patch('/cars/{car}/custom-prices/{customPrice}',[CarCustomPriceController::class, 'update']);
+
+        Route::patch('/cars/{car}/media',[CarMediaController::class,'update']);
     });
 
 

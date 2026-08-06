@@ -70,4 +70,8 @@ return [
 
     'unavailable_price_not_allowed' => 'Daily price cannot be set when car is unavailable.',
 
+    'cover_not_found' => 'Car cover image not found.',
+    
+    'media_updated' => 'Car images and videos have been updated successfully.',
+
 ];

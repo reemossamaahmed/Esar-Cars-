@@ -88,6 +88,10 @@ return [
             'rule-name' => 'custom-message',
         ],
         'daily_price_required' => 'Daily price is required when reason is custom price.',
+
+        'cover_image.image_url' => [
+            'url' => 'رابط صورة الغلاف غير صحيح.'
+        ],
     ],
 
     /*
@@ -179,7 +183,9 @@ return [
         'instant_booking_enabled' => 'الحجز الفوري',
 
         'deposit.price' => 'قيمة التأمين',
-        
+
+        'cover_image.image_url' => 'رابط صورة الغلاف',
+
 
     ]
 

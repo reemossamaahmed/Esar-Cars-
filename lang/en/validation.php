@@ -194,6 +194,10 @@ return [
             'rule-name' => 'custom-message',
         ],
         'daily_price_required' => 'Daily price is required when reason is custom price.',
+
+        'cover_image.image_url' => [
+            'url' => 'The cover image URL is invalid.',
+        ],
     ],
 
     /*
@@ -219,6 +223,8 @@ return [
         'discount_rules.*.from_days' => 'discount start days',
 
         'discount_rules.*.to_days' => 'discount end days',
+
+        'cover_image.image_url' => 'cover image URL',
     ],
 
 ];

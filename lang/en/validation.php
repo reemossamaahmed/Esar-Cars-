@@ -208,6 +208,16 @@ return [
 
     'attributes' => [
         'email' => 'email address',
+        
+        'deposit.title' => 'deposit title',
+
+        'discount_rules.*.title' => 'discount title',
+
+        'discount_rules.*.total_price' => 'discount total price',
+
+        'discount_rules.*.from_days' => 'discount start days',
+
+        'discount_rules.*.to_days' => 'discount end days',
     ],
 
 ];

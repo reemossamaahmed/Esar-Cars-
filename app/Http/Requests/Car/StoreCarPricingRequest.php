@@ -4,7 +4,7 @@ namespace App\Http\Requests\Car;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCarPricingRequest extends FormRequest
+class StoreCarPricingRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -23,14 +23,13 @@ class UpdateCarPricingRequest extends FormRequest
             */
 
             'daily_price' => [
-                'sometimes',
+                'required',
                 'numeric',
                 'min:0',
             ],
 
 
             'monthly_price' => [
-                'sometimes',
                 'nullable',
                 'numeric',
                 'min:0',
@@ -38,7 +37,6 @@ class UpdateCarPricingRequest extends FormRequest
 
 
             'yearly_price' => [
-                'sometimes',
                 'nullable',
                 'numeric',
                 'min:0',
@@ -52,9 +50,10 @@ class UpdateCarPricingRequest extends FormRequest
             */
 
             'instant_booking_enabled' => [
-                'sometimes',
+                'nullable',
                 'boolean',
             ],
+
 
 
             /*
@@ -64,7 +63,6 @@ class UpdateCarPricingRequest extends FormRequest
             */
 
             'deposit' => [
-                'sometimes',
                 'nullable',
                 'array',
             ],
@@ -98,7 +96,6 @@ class UpdateCarPricingRequest extends FormRequest
             */
 
             'discount_rules' => [
-                'sometimes',
                 'nullable',
                 'array',
             ],
@@ -130,6 +127,8 @@ class UpdateCarPricingRequest extends FormRequest
                 'integer',
                 'gte:discount_rules.*.from_days',
             ],
+
+
 
         ];
     }

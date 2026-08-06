@@ -22,6 +22,8 @@ return [
 
     'pricing_updated' => 'Car pricing updated successfully.',
 
+    'pricing_created' => 'Car pricing created successfully.',
+
     'custom_price_created' => 'Custom price added successfully.',
 
     'custom_price_overlap' => 'The selected period overlaps with an existing custom price.',
@@ -53,5 +55,11 @@ return [
     'not_found' => 'Car not found.',
 
     'unauthorized' => 'You are not allowed to update this car.',
+
+    'pricing_exists' => 'Pricing already exists.',
+
+    'pricing_not_found' => 'Pricing data not found.',
+
+    'invalid_discount_period' => 'Discount end days must be greater than or equal to start days.',
 
 ];

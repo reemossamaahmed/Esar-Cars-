@@ -7,10 +7,10 @@ use App\Models\CarPricing;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\BusinessException;
 
-class UpdateCarPricingService
+class CarPricingService
 {
 
-    public function update(Car $car, array $data): CarPricing
+    public function create(Car $car, array $data): CarPricing
     {
         return DB::transaction(function () use ($car, $data) {
 
@@ -30,16 +30,19 @@ class UpdateCarPricingService
             | Save Pricing
             |--------------------------------------------------------------------------
             */
+            $exists = CarPricing::where('car_id', $car->id)->exists();
 
-            $pricing = CarPricing::updateOrCreate(
 
-                [
-                    'car_id' => $car->id,
-                ],
+            if ($exists) {
 
-                $prices
+                throw new BusinessException(
+                    __('car.pricing_exists'),
+                    422
+                );
 
-            );
+            }
+
+            $pricing = CarPricing::create([ 'car_id' => $car->id,...$prices]);
 
 
 
@@ -61,6 +64,58 @@ class UpdateCarPricingService
 
             $this->syncDiscountRules(
                 $pricing, $data['discount_rules'] ?? []);
+
+
+            return $pricing->load([
+                'discountRules'
+            ]);
+
+        });
+    }
+
+    public function update(Car $car, array $data): CarPricing
+    {
+        return DB::transaction(function () use ($car, $data) {
+
+            $pricing = $car->pricing;
+
+
+            if (!$pricing) {
+
+                throw new BusinessException(
+                    __('car.pricing_not_found'),
+                    404
+                );
+
+            }
+
+
+            $prices = $this->prepareUpdatePrices(
+                $pricing,
+                $data
+            );
+
+
+            $pricing->update($prices);
+
+            if (array_key_exists('deposit', $data)) {
+
+                $this->saveDeposit(
+                    $pricing,
+                    $data['deposit']
+                );
+
+            }
+
+
+            if (array_key_exists('discount_rules', $data)) {
+
+                $this->syncDiscountRules(
+                    $pricing,
+                    $data['discount_rules']
+                );
+
+            }
 
 
             return $pricing->load([
@@ -95,6 +150,36 @@ class UpdateCarPricingService
 
             'instant_booking_enabled'
                 => $data['instant_booking_enabled'] ?? false,
+
+        ];
+    }
+
+
+    private function prepareUpdatePrices(CarPricing $pricing, array $data): array
+    {
+
+        $daily = $data['daily_price']
+            ?? $pricing->daily_price;
+
+
+        return [
+
+            'daily_price' => $daily,
+
+
+            'monthly_price'
+                => $data['monthly_price']
+                ?? ($daily * 30),
+
+
+            'yearly_price'
+                => $data['yearly_price']
+                ?? ($daily * 365),
+
+
+            'instant_booking_enabled'
+                => $data['instant_booking_enabled']
+                ?? $pricing->instant_booking_enabled,
 
         ];
     }
@@ -210,6 +295,32 @@ class UpdateCarPricingService
 
     private function checkDiscountConflicts(array $rules): void
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Validate Days Range
+        |--------------------------------------------------------------------------
+        */
+
+        foreach ($rules as $rule) {
+
+            if ($rule['to_days'] < $rule['from_days']) {
+
+                throw new BusinessException(
+                    __('car.invalid_discount_period'),
+                    422
+                );
+
+            }
+
+        }
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Check Overlapping Rules
+        |--------------------------------------------------------------------------
+        */
 
         foreach ($rules as $index => $rule) {
 
@@ -217,10 +328,31 @@ class UpdateCarPricingService
             foreach ($rules as $secondIndex => $secondRule) {
 
 
+                /*
+                |--------------------------------------------------------------------------
+                | Skip Same Rule
+                |--------------------------------------------------------------------------
+                */
+
                 if ($index === $secondIndex) {
                     continue;
                 }
 
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Check Overlap
+                |--------------------------------------------------------------------------
+                |
+                | Example:
+                |
+                | Rule 1: 1 -> 7 days
+                | Rule 2: 5 -> 10 days
+                |
+                | Conflict because 5-7 exists in both
+                |
+                */
 
                 $overlap =
                     $rule['from_days'] <= $secondRule['to_days']
@@ -241,7 +373,8 @@ class UpdateCarPricingService
             }
 
         }
-
     }
+
+
 
 }

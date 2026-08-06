@@ -150,6 +150,17 @@ return [
 
         'images' => 'الصور',
 
+        'deposit.title' => 'عنوان التأمين',
+
+        'discount_rules.*.title' => 'عنوان العرض',
+
+        'discount_rules.*.total_price' => 'إجمالي سعر العرض',
+
+        'discount_rules.*.from_days' => 'عدد أيام بداية العرض',
+
+        'discount_rules.*.to_days' => 'عدد أيام نهاية العرض',
+
+
     ]
 
 ];

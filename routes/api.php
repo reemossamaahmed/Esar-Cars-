@@ -44,9 +44,9 @@ Route::prefix('v1')->group(function(){
         //CREATE CAR MODULE
         Route::post('/cars',[CarController::class, 'store']);
 
-        Route::post('/cars/{car}/documents',[CarDocumentController::class, 'store']);
+        Route::post('/cars/{car}/documents',[CarDocumentController::class, 'save']); //This Route For Create Or Update Documents
 
-        Route::patch('/cars/{car}/pricing', [CarPricingController::class,'update']);
+        Route::post('/cars/{car}/pricing', [CarPricingController::class,'store']);
 
         Route::post('/cars/{car}/custom-pricing',[CarCustomPriceController::class, 'store']);
 
@@ -58,6 +58,8 @@ Route::prefix('v1')->group(function(){
 
         //UPDATE CAR MODULE
         Route::patch('/cars/{car}',[CarController::class,'update']);
+
+        Route::patch('/cars/{car}/pricing',[CarPricingController::class,'update']);
     });
 
 

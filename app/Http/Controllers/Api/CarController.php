@@ -7,8 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Car\StoreCarRequest;
 use App\Http\Requests\Car\UpdateCarRequest;
 use App\Http\Resources\CarResource;
-use App\Services\Car\CreateCarService;
-use App\Services\Car\UpdateCarService;
+use App\Services\Car\CarService;
 use App\Http\Responses\ApiResponse;
 
 class CarController extends Controller
@@ -16,7 +15,7 @@ class CarController extends Controller
 
 
 
-    public function __construct(private CreateCarService $createCarService, private UpdateCarService $updateCarService)
+    public function __construct(private CarService $carService)
     {
     }
 
@@ -24,7 +23,7 @@ class CarController extends Controller
     public function store(StoreCarRequest $request)
     {
 
-        $car = $this->createCarService->create($request->validated());
+        $car = $this->carService->create($request->validated());
 
 
         return ApiResponse::success(
@@ -37,7 +36,7 @@ class CarController extends Controller
     public function update(UpdateCarRequest $request, Car $car)
     {
 
-        $car = $this->updateCarService
+        $car = $this->carService
             ->update(
                 $car,
                 $request->validated()

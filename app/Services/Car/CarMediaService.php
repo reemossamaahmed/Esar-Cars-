@@ -16,7 +16,19 @@ class CarMediaService
 
             /*
             |--------------------------------------------------------------------------
-            | Check Cover Images
+            | Check Existing Images
+            |--------------------------------------------------------------------------
+            */
+
+            $hasExistingImages = $car
+                ->images()
+                ->exists();
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Count Cover Images In Request
             |--------------------------------------------------------------------------
             */
 
@@ -25,7 +37,22 @@ class CarMediaService
                 ->count();
 
 
-            if ($coverCount !== 1) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | First Time Media Upload
+            |--------------------------------------------------------------------------
+            |
+            | لو العربية ليس لها صور:
+            | لازم يكون فيه cover واحد
+            |
+            */
+
+            if (
+                !$hasExistingImages
+                &&
+                $coverCount !== 1
+            ) {
 
                 throw ValidationException::withMessages([
 
@@ -41,14 +68,14 @@ class CarMediaService
 
             /*
             |--------------------------------------------------------------------------
-            | Check Existing Cover
+            | Prevent Adding Another Cover
             |--------------------------------------------------------------------------
             */
 
             if (
-                $car->images()
-                    ->where('is_cover', true)
-                    ->exists()
+                $hasExistingImages
+                &&
+                $coverCount > 0
             ) {
 
                 throw ValidationException::withMessages([
@@ -69,11 +96,31 @@ class CarMediaService
             |--------------------------------------------------------------------------
             */
 
-            $car->update([
+            if(
+                array_key_exists(
+                    'video_url',
+                    $data
+                )
+            ){
 
-                'video_url' => $data['video_url'] ?? null
+                $car->update([
 
-            ]);
+                    'video_url' => $data['video_url']
+
+                ]);
+
+            }
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Calculate Order Index
+            |--------------------------------------------------------------------------
+            */
+
+            $orderIndex =
+                ($car->images()->max('order_index') ?? 0) + 1;
 
 
 
@@ -83,21 +130,22 @@ class CarMediaService
             |--------------------------------------------------------------------------
             */
 
-            $orderIndex =
-                ($car->images()->max('order_index') ?? 0) + 1;
+            foreach($data['images'] as $image)
+            {
 
 
-            foreach ($data['images'] as $image) {
+                $isCover =
+                    $image['is_cover'] ?? false;
 
-
-                $isCover = $image['is_cover'] ?? false;
 
 
                 $car->images()->create([
 
                     'image_url' => $image['image_url'],
 
+
                     'is_cover' => $isCover,
+
 
                     'order_index' => $isCover
                         ? null
@@ -106,6 +154,7 @@ class CarMediaService
                 ]);
 
             }
+
 
 
             return $car->load('images');

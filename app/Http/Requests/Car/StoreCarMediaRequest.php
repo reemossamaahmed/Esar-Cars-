@@ -44,27 +44,27 @@ class StoreCarMediaRequest extends FormRequest
     }
 
 
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
+    // public function withValidator($validator)
+    // {
+    //     $validator->after(function ($validator) {
 
-            $images = $this->images ?? [];
-
-
-            $covers = collect($images)
-                ->where('is_cover', true)
-                ->count();
+    //         $images = $this->images ?? [];
 
 
-            if ($covers !== 1) {
+    //         $covers = collect($images)
+    //             ->where('is_cover', true)
+    //             ->count();
 
-                $validator->errors()->add(
-                    'images',
-                    'Exactly one cover image is required.'
-                );
 
-            }
+    //         if ($covers !== 1) {
 
-        });
-    }
+    //             $validator->errors()->add(
+    //                 'images',
+    //                 'Exactly one cover image is required.'
+    //             );
+
+    //         }
+
+    //     });
+    // }
 }

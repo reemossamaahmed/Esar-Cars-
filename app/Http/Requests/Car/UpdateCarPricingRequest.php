@@ -128,9 +128,32 @@ class UpdateCarPricingRequest extends FormRequest
             'discount_rules.*.to_days' => [
                 'required',
                 'integer',
-                'gte:discount_rules.*.from_days',
             ],
 
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+
+            foreach ($this->discount_rules ?? [] as $index => $rule) {
+
+                if (
+                    isset($rule['from_days'], $rule['to_days'])
+                    &&
+                    $rule['to_days'] < $rule['from_days']
+                ) {
+
+                    $validator->errors()->add(
+                        "discount_rules.$index.to_days",
+                        __('validation.discount_days_invalid')
+                    );
+
+                }
+
+            }
+
+        });
     }
 }

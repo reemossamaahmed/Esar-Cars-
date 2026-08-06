@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'discount_days_invalid' =>'يجب أن يكون عدد أيام نهاية العرض أكبر من أو يساوي عدد أيام بداية العرض.',
     'otp_digits' => 'رمز التحقق يجب أن يتكون من 6 أرقام.',
     'invalid_otp'=>'رمز التحقق غير صحيح.',
     'expired_otp'=>'انتهت صلاحية رمز التحقق.',
@@ -46,6 +47,7 @@ return [
     'image' => 'يجب أن يكون :attribute صورة.',
     'in' => 'القيمة المحددة في :attribute غير صحيحة.',
     'required' => 'حقل :attribute مطلوب.',
+    'required_with' => 'حقل :attribute مطلوب عند إرسال البيانات المرتبطة به.',
     'nullable' => 'يمكن أن تكون قيمة :attribute فارغة.',
     'string' => 'يجب أن يكون :attribute نصًا.',
     'integer' => 'يجب أن يكون :attribute رقمًا صحيحًا.',
@@ -57,6 +59,12 @@ return [
     'max' => [
         'string'=>'يجب ألا يزيد :attribute عن :max أحرف.'
     ],
+    'min' => [
+        'numeric' => 'يجب ألا تقل قيمة :attribute عن :min.',
+        'string' => 'يجب ألا يقل :attribute عن :min أحرف.',
+        'array' => 'يجب أن يحتوي :attribute على :min عناصر على الأقل.',
+
+],
     'mimes'=>'يجب أن يكون :attribute من نوع: :values.',
     'same'=>'يجب أن يطابق :attribute قيمة :other.',
     'different' => 'يجب أن يختلف :attribute عن :other.',
@@ -160,6 +168,15 @@ return [
 
         'discount_rules.*.to_days' => 'عدد أيام نهاية العرض',
 
+        'daily_price' => 'السعر اليومي',
+
+        'monthly_price' => 'السعر الشهري',
+
+        'yearly_price' => 'السعر السنوي',
+
+        'instant_booking_enabled' => 'الحجز الفوري',
+
+        'deposit.price' => 'قيمة التأمين',
 
     ]
 

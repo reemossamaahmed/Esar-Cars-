@@ -12,7 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+    'discount_days_invalid' => 'The discount end days must be greater than or equal to the discount start days.',
     'otp_digits' => 'OTP must be 6 digits.',
     'expired_otp'=>'OTP has expired.',
     'otp_required' => 'OTP is required.',
@@ -208,7 +208,7 @@ return [
 
     'attributes' => [
         'email' => 'email address',
-        
+
         'deposit.title' => 'deposit title',
 
         'discount_rules.*.title' => 'discount title',

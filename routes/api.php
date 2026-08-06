@@ -39,7 +39,7 @@ Route::prefix('v1')->group(function(){
         Route::post('/google', [GoogleAuthController::class, 'login']);
     });
 
-    Route::middleware(['auth:sanctum', 'role:owner'])->prefix('owner')->group(function () {
+    Route::middleware(['auth:sanctum', 'role:owner'])->scopeBindings()->prefix('owner')->group(function () {
 
         //CREATE CAR MODULE
         Route::post('/cars',[CarController::class, 'store']);
@@ -48,7 +48,7 @@ Route::prefix('v1')->group(function(){
 
         Route::post('/cars/{car}/pricing', [CarPricingController::class,'store']);
 
-        Route::post('/cars/{car}/custom-pricing',[CarCustomPriceController::class, 'store']);
+        Route::post('/cars/{car}/custom-price',[CarCustomPriceController::class, 'store']);
 
         Route::get('/cars/{car}/calendar',[CarCalendarController::class, 'index']);
 
@@ -60,6 +60,8 @@ Route::prefix('v1')->group(function(){
         Route::patch('/cars/{car}',[CarController::class,'update']);
 
         Route::patch('/cars/{car}/pricing',[CarPricingController::class,'update']);
+
+        Route::patch('/cars/{car}/custom-prices/{customPrice}',[CarCustomPriceController::class, 'update']);
     });
 
 

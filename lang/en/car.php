@@ -62,4 +62,12 @@ return [
 
     'invalid_discount_period' => 'Discount end days must be greater than or equal to start days.',
 
+    'custom_price_updated' => 'Custom price updated successfully.',
+
+    'custom_price_not_found' => 'Custom price not found.',
+
+    'no_changes' => 'No changes were made to the car data.',
+
+    'unavailable_price_not_allowed' => 'Daily price cannot be set when car is unavailable.',
+
 ];

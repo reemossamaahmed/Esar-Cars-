@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'prohibited' => 'حقل :attribute غير مسموح به.',
     'discount_days_invalid' =>'يجب أن يكون عدد أيام نهاية العرض أكبر من أو يساوي عدد أيام بداية العرض.',
     'otp_digits' => 'رمز التحقق يجب أن يتكون من 6 أرقام.',
     'invalid_otp'=>'رمز التحقق غير صحيح.',
@@ -86,6 +87,7 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'daily_price_required' => 'Daily price is required when reason is custom price.',
     ],
 
     /*
@@ -177,6 +179,7 @@ return [
         'instant_booking_enabled' => 'الحجز الفوري',
 
         'deposit.price' => 'قيمة التأمين',
+        
 
     ]
 

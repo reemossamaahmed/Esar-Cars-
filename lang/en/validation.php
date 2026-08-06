@@ -193,6 +193,7 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'daily_price_required' => 'Daily price is required when reason is custom price.',
     ],
 
     /*

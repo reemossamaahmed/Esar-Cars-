@@ -38,39 +38,19 @@ class StoreCustomPriceRequest extends FormRequest
             ],
 
             'daily_price' => [
+                Rule::requiredIf(
+                    fn () => $this->reason === CustomPriceReason::CUSTOM_PRICE->value
+                ),
+                Rule::prohibitedIf(
+                    fn () => $this->reason === CustomPriceReason::UNAVAILABLE->value
+                ),
                 'nullable',
                 'numeric',
                 'min:0',
+
             ],
 
         ];
     }
 
-    public function after()
-    {
-
-        return [
-
-            function($validator){
-
-                if(
-                    $this->reason
-                    === CustomPriceReason::CUSTOM_PRICE->value
-                    &&
-                    !$this->daily_price
-                ){
-
-                    $validator->errors()->add(
-                        'daily_price',
-                        'Daily price is required for custom price.'
-                    );
-
-                }
-
-
-            }
-
-        ];
-
-    }
 }

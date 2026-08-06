@@ -3,6 +3,7 @@
 namespace App\Services\Car;
 
 use App\Models\Car;
+use App\Models\CarImage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -221,6 +222,75 @@ class CarMediaService
 
                     'image_url' =>
                         $data['cover_image']['image_url']
+
+                ]);
+
+            }
+
+
+
+            return $car->load('images');
+
+        });
+
+    }
+
+    public function delete(Car $car, CarImage $image): Car
+    {
+        return DB::transaction(function () use ($car, $image) {
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Prevent deleting cover image
+            |--------------------------------------------------------------------------
+            */
+
+            if ($image->is_cover) {
+
+
+                throw ValidationException::withMessages([
+
+                    'image' => [
+                        __('car.cover_delete_not_allowed')
+                    ]
+
+                ]);
+
+            }
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Delete Image
+            |--------------------------------------------------------------------------
+            */
+
+            $image->delete();
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Reorder Images
+            |--------------------------------------------------------------------------
+            */
+
+            $images = $car
+                ->images()
+                ->where('is_cover', false)
+                ->orderBy('order_index')
+                ->get();
+
+
+
+            foreach ($images as $index => $item) {
+
+
+                $item->update([
+
+                    'order_index' => $index + 1
 
                 ]);
 

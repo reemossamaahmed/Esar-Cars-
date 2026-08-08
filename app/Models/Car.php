@@ -143,6 +143,7 @@ class Car extends Model
     public function images()
     {
         return $this->hasMany(CarImage::class)
+            ->orderByRaw('is_cover DESC')
             ->orderBy('order_index');
     }
 

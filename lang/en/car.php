@@ -78,4 +78,14 @@ return [
 
     'media_deleted' => 'Car image deleted successfully.',
 
+    'duplicate_image_ids' => 'Duplicate image ids are not allowed.',
+
+    'duplicate_order_indexes' => 'Duplicate order indexes are not allowed.',
+
+    'image_not_belongs_to_car' => 'One of the images does not belong to this car.',
+
+    'cover_image_reorder_not_allowed' => 'Cover image cannot be reordered.',
+
+    'images_reordered' => 'Car images reordered successfully.',
+
 ];

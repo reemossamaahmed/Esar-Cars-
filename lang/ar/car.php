@@ -77,4 +77,15 @@ return [
     'cover_delete_not_allowed' => 'لا يمكن حذف صورة الغلاف.',
 
     'media_deleted' => 'تم حذف صورة السيارة بنجاح.',
+
+    'duplicate_image_ids' => 'لا يمكن تكرار نفس الصورة أكثر من مرة.',
+
+    'duplicate_order_indexes' => 'لا يمكن تكرار ترتيب الصور.',
+
+    'image_not_belongs_to_car' => 'إحدى الصور لا تنتمي إلى هذه السيارة.',
+
+    'cover_image_reorder_not_allowed' => 'لا يمكن تغيير ترتيب صورة الغلاف.',
+
+    'images_reordered' => 'تم تحديث ترتيب صور السيارة بنجاح.',
+
 ];

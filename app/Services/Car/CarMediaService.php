@@ -303,4 +303,28 @@ class CarMediaService
         });
 
     }
+
+    public function reorder(Car $car, array $data): Car
+    {
+        return DB::transaction(function () use ($car, $data) {
+
+
+            foreach ($data['images'] as $image) {
+
+
+                $car->images()
+                    ->where('id', $image['id'])
+                    ->update([
+
+                        'order_index' => $image['order_index']
+
+                    ]);
+
+            }
+
+
+            return $car->load('images');
+
+        });
+    }
 }

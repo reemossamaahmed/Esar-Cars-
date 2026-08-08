@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Car\StoreCarMediaRequest;
 use App\Http\Requests\Car\UpdateCarMediaRequest;
+use App\Http\Requests\Car\ReorderCarImagesRequest;
 use App\Http\Resources\CarResource;
 use App\Models\Car;
 use App\Models\CarImage;
@@ -81,4 +82,23 @@ class CarMediaController extends Controller
 
     }
 
+    public function reorder(ReorderCarImagesRequest $request, Car $car)
+    {
+        $this->authorize(
+            'update',
+            $car
+        );
+
+        $car = $this->mediaService->reorder(
+            $car,
+            $request->validated()
+        );
+
+
+        return ApiResponse::success(
+            new CarResource($car),
+            __('car.images_reordered')
+        );
+
+    }
 }

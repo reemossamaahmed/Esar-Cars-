@@ -88,4 +88,8 @@ return [
 
     'images_reordered' => 'Car images reordered successfully.',
 
+    'days_before_min' => 'The number of days must be greater than or equal to zero.',
+
+    'policy_updated' => 'Cancellation policy updated successfully.',
+
 ];

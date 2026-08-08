@@ -4,7 +4,7 @@ namespace App\Http\Requests\Car;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCancellationPolicyRequest extends FormRequest
+class UpdateCancellationPolicyRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -18,30 +18,54 @@ class StoreCancellationPolicyRequest extends FormRequest
         return [
 
             'policy_text' => [
-                'required',
+
+                'sometimes',
                 'string',
                 'max:1000',
+
             ],
 
 
             'days_before' => [
-                'required',
+
+                'sometimes',
                 'integer',
                 'min:0',
+
             ],
 
         ];
     }
 
 
+    public function withValidator($validator)
+    {
+
+        $validator->after(function ($validator) {
+
+
+            if ($this->all() === []) {
+
+
+                $validator->errors()->add(
+
+                    'update',
+
+                    __('car.no_changes')
+
+                );
+
+            }
+
+
+        });
+
+    }
+
 
     public function messages(): array
     {
         return [
-
-            'policy_text.required' =>
-                __('car.policy_text_required'),
-
 
             'policy_text.string' =>
                 __('car.policy_text_string'),
@@ -49,10 +73,6 @@ class StoreCancellationPolicyRequest extends FormRequest
 
             'policy_text.max' =>
                 __('car.policy_text_max'),
-
-
-            'days_before.required' =>
-                __('car.days_before_required'),
 
 
             'days_before.integer' =>

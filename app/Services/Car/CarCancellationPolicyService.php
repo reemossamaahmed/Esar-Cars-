@@ -37,4 +37,14 @@ class CarCancellationPolicyService
 
     }
 
+    public function update(CarPolicy $policy, array $data): CarPolicy
+    {
+
+        $policy->update($data);
+
+
+        return $policy->refresh();
+
+    }
+
 }

@@ -69,6 +69,8 @@ Route::prefix('v1')->group(function(){
 
         Route::patch('/cars/{car}/media/reorder',[CarMediaController::class, 'reorder']);
 
+        Route::patch('/cars/{car}/cancellation-policy',[CarCancellationPolicyController::class,'update']);
+
     });
 
 

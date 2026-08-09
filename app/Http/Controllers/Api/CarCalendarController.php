@@ -10,15 +10,11 @@ use App\Services\Car\CarCalendarService;
 
 class CarCalendarController extends Controller
 {
-    public function __construct(
-        private readonly CarCalendarService $calendarService
-    ) {
+    public function __construct(private readonly CarCalendarService $calendarService)
+    {
     }
 
-    public function index(
-        CarCalendarRequest $request,
-        Car $car
-    )
+    public function index(CarCalendarRequest $request, Car $car)
     {
         $calendar = $this->calendarService->getCalendar(
             $car,

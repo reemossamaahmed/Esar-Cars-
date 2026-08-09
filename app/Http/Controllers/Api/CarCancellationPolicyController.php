@@ -13,17 +13,13 @@ use App\Http\Responses\ApiResponse;
 class CarCancellationPolicyController extends Controller
 {
 
-    public function __construct(
-        private readonly CarCancellationPolicyService $policyService
-    ) {
+    public function __construct(private readonly CarCancellationPolicyService $policyService)
+    {
     }
 
 
 
-    public function store(
-        StoreCancellationPolicyRequest $request,
-        Car $car
-    )
+    public function store(StoreCancellationPolicyRequest $request, Car $car)
     {
 
 

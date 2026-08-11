@@ -25,12 +25,7 @@ class CarCustomPriceController extends Controller
     public function store(StoreCustomPriceRequest $request, Car $car)
     {
 
-        $this->authorize(
-            'update',
-            $car
-        );
-
-
+        $this->authorize('update',$car);
 
         $customPrice =
             $this->service->create(

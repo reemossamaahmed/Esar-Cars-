@@ -35,6 +35,7 @@ class CarController extends Controller
 
     public function update(UpdateCarRequest $request, Car $car)
     {
+        $this->authorize('update', $car);
 
         $car = $this->carService
             ->update(
@@ -53,7 +54,7 @@ class CarController extends Controller
     public function show(Car $car)
     {
         $this->authorize('view', $car);
-        
+
         $car->load([
             'brand',
             'carModel',

@@ -50,4 +50,26 @@ class CarController extends Controller
 
     }
 
+    public function show(Car $car)
+    {
+        $this->authorize('view', $car);
+        
+        $car->load([
+            'brand',
+            'carModel',
+            'carType',
+            'features',
+            'location',
+            'pricing',
+            'customPrices',
+            'images',
+            'policy',
+        ]);
+
+        return ApiResponse::success(
+            new CarResource($car),
+            __('car.retrieved_successfully')
+        );
+    }
+
 }

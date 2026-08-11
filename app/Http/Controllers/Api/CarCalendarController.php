@@ -16,6 +16,8 @@ class CarCalendarController extends Controller
 
     public function index(CarCalendarRequest $request, Car $car)
     {
+        $this->authorize('view', $car);
+        
         $calendar = $this->calendarService->getCalendar(
             $car,
             $request->validated()

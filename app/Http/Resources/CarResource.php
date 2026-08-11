@@ -99,6 +99,10 @@ class CarResource extends JsonResource
                 $this->whenLoaded('pricing')
             ),
 
+            'custom_prices' => CarCustomPriceResource::collection(
+                $this->whenLoaded('customPrices')
+            ),
+
 
             /*
             |--------------------------------------------------------------------------

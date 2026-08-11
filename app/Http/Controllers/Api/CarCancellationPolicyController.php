@@ -21,7 +21,7 @@ class CarCancellationPolicyController extends Controller
 
     public function store(StoreCancellationPolicyRequest $request, Car $car)
     {
-
+        $this->authorize('update', $car);
 
         $policy = $this->policyService->store(
             $car,
@@ -38,6 +38,7 @@ class CarCancellationPolicyController extends Controller
 
     public function update(UpdateCancellationPolicyRequest $request, Car $car)
     {
+        $this->authorize('update', $car);
 
         $policy = $this->policyService->update(
             $car->policy,

@@ -21,7 +21,7 @@ class CarPolicy
      */
     public function view(User $user, Car $car): bool
     {
-        return false;
+        return $car->owner_id === $user->id;
     }
 
     /**

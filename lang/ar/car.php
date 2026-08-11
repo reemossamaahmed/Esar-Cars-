@@ -92,4 +92,6 @@ return [
 
     'policy_updated' => 'تم تحديث سياسة الإلغاء بنجاح.',
 
+    'retrieved_successfully' => 'تم جلب بيانات السيارة بنجاح.',
+
 ];

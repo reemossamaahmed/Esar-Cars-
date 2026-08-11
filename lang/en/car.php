@@ -92,4 +92,6 @@ return [
 
     'policy_updated' => 'Cancellation policy updated successfully.',
 
+    'retrieved_successfully' => 'Car details retrieved successfully.',
+
 ];

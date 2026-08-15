@@ -18,6 +18,8 @@ class CarCancellationPolicyResource extends JsonResource
 
             'days_before' => $this->days_before,
 
+            'is_active' => $this->is_active,
+
         ];
     }
 

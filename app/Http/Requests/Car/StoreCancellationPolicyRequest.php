@@ -30,6 +30,11 @@ class StoreCancellationPolicyRequest extends FormRequest
                 'min:0',
             ],
 
+            'is_active' => [
+                'sometimes',
+                'boolean',
+            ],
+
         ];
     }
 
@@ -61,6 +66,9 @@ class StoreCancellationPolicyRequest extends FormRequest
 
             'days_before.min' =>
                 __('car.days_before_min'),
+
+            'is_active.boolean' =>
+                __('car.is_active_boolean'),
 
         ];
     }

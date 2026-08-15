@@ -14,6 +14,12 @@ class CarPolicy extends Model
 
         'policy_text',
 
+        'is_active'
+
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 
 

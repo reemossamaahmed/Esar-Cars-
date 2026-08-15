@@ -33,6 +33,8 @@ class CarCancellationPolicyService
 
             'days_before' => $data['days_before'],
 
+            'is_active' => $data['is_active'] ?? true,
+
         ]);
 
     }

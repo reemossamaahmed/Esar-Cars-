@@ -94,4 +94,6 @@ return [
 
     'retrieved_successfully' => 'تم جلب بيانات السيارة بنجاح.',
 
+    'is_active_boolean' => 'يجب أن تكون حالة السياسة صحيحة أو خاطئة.',
+
 ];

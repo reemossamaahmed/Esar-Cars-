@@ -31,6 +31,9 @@ return new class extends Migration
 
 
             $table->text('policy_text')->nullable();
+            
+
+            $table->boolean('is_active')->default(true);
 
 
             $table->timestamps();

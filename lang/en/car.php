@@ -94,4 +94,6 @@ return [
 
     'retrieved_successfully' => 'Car details retrieved successfully.',
 
+    'is_active_boolean' => 'The policy status must be true or false.',
+
 ];

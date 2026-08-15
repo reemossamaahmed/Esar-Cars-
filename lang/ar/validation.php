@@ -180,7 +180,7 @@ return [
 
         'yearly_price' => 'السعر السنوي',
 
-        'instant_booking_enabled' => 'الحجز الفوري',
+        'external_booking_enabled' => 'الحجز من خارج المحافظة',
 
         'deposit.price' => 'قيمة التأمين',
 

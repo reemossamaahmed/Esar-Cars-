@@ -44,7 +44,7 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
 
-            $table->boolean('instant_booking_enabled')
+            $table->boolean('external_booking_enabled')
                 ->default(false);
 
             /*

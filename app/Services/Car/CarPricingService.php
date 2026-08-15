@@ -148,8 +148,8 @@ class CarPricingService
                 ?? ($daily * 365),
 
 
-            'instant_booking_enabled'
-                => $data['instant_booking_enabled'] ?? false,
+            'external_booking_enabled'
+                => $data['external_booking_enabled'] ?? false,
 
         ];
     }
@@ -177,9 +177,9 @@ class CarPricingService
                 ?? ($daily * 365),
 
 
-            'instant_booking_enabled'
-                => $data['instant_booking_enabled']
-                ?? $pricing->instant_booking_enabled,
+            'external_booking_enabled'
+                => $data['external_booking_enabled']
+                ?? $pricing->external_booking_enabled,
 
         ];
     }

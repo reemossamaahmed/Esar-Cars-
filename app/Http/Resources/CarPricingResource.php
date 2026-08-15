@@ -30,12 +30,11 @@ class CarPricingResource extends JsonResource
 
             /*
             |--------------------------------------------------------------------------
-            | Booking
+            | External Booking
             |--------------------------------------------------------------------------
             */
 
-            'instant_booking_enabled'
-                => $this->instant_booking_enabled,
+            'external_booking_enabled' => $this->external_booking_enabled,
 
 
 

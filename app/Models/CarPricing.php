@@ -22,7 +22,7 @@ class CarPricing extends Model
 
         'yearly_price',
 
-        'instant_booking_enabled',
+        'external_booking_enabled',
 
         'deposit_title',
 
@@ -47,9 +47,7 @@ class CarPricing extends Model
 
         'yearly_price'  => 'decimal:2',
 
-        'instant_booking_enabled' => 'boolean',
-
-
+        'external_booking_enabled' => 'boolean',
 
     ];
 

@@ -225,6 +225,8 @@ return [
         'discount_rules.*.to_days' => 'discount end days',
 
         'cover_image.image_url' => 'cover image URL',
+
+        'external_booking_enabled' => 'External booking',
     ],
 
 ];

@@ -47,11 +47,11 @@ class UpdateCarPricingRequest extends FormRequest
 
             /*
             |--------------------------------------------------------------------------
-            | Instant Booking
+            | External Booking
             |--------------------------------------------------------------------------
             */
 
-            'instant_booking_enabled' => [
+            'external_booking_enabled' => [
                 'sometimes',
                 'boolean',
             ],

@@ -96,4 +96,6 @@ return [
 
     'is_active_boolean' => 'The policy status must be true or false.',
 
+    'publish_boolean' => 'The publish field must be true or false.',
+
 ];

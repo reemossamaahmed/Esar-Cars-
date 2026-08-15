@@ -39,6 +39,11 @@ class UpdateCancellationPolicyRequest extends FormRequest
                 'boolean',
             ],
 
+            'publish' => [
+                'sometimes',
+                'boolean',
+            ],
+
         ];
     }
 
@@ -89,6 +94,9 @@ class UpdateCancellationPolicyRequest extends FormRequest
 
             'is_active.boolean' =>
                 __('car.is_active_boolean'),
+
+            'publish.boolean' =>
+                __('car.publish_boolean'),
 
         ];
     }

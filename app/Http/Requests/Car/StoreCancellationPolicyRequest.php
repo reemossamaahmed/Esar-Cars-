@@ -35,6 +35,11 @@ class StoreCancellationPolicyRequest extends FormRequest
                 'boolean',
             ],
 
+            'publish' => [
+                'required',
+                'boolean',
+            ],
+
         ];
     }
 
@@ -69,6 +74,9 @@ class StoreCancellationPolicyRequest extends FormRequest
 
             'is_active.boolean' =>
                 __('car.is_active_boolean'),
+
+            'publish.boolean' =>
+                __('car.publish_boolean'),
 
         ];
     }

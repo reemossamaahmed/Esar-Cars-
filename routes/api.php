@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\CarCustomPriceController;
 use App\Http\Controllers\Api\CarCalendarController;
 use App\Http\Controllers\Api\CarMediaController;
 use App\Http\Controllers\Api\CarCancellationPolicyController;
+use App\Http\Controllers\Api\LookupController;
 
 
 
@@ -80,7 +81,13 @@ Route::prefix('v1')->group(function(){
     Route::get('/cars', [CarController::class, 'index']);
 
 
-
+    Route::prefix('lookups')->group(function () {
+        Route::get('/brands', [LookupController::class, 'brands']);
+        Route::get('/car-models', [LookupController::class, 'carModels']);
+        Route::get('/car-types', [LookupController::class, 'carTypes']);
+        Route::get('/cities', [LookupController::class, 'cities']);
+        Route::get('/features', [LookupController::class, 'features']);
+    });
 
 });
 

@@ -18,7 +18,6 @@ class SetLocale
     {
         $locale = $request->header('Accept-Language','en');
 
-
         if (in_array($locale, ['ar', 'en'])) {
 
             App::setLocale($locale);

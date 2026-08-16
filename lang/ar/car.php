@@ -98,4 +98,8 @@ return [
 
     'publish_boolean' => 'يجب أن تكون قيمة النشر صحيحة أو خاطئة.',
 
+    'cars_retrieved_successfully' => 'تم جلب السيارات بنجاح.',
+
+    'max_price_must_be_greater_than_min_price'  => 'يجب أن يكون الحد الأقصى للسعر أكبر من أو يساوي الحد الأدنى للسعر.',
+
 ];

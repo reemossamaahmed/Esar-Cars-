@@ -98,4 +98,8 @@ return [
 
     'publish_boolean' => 'The publish field must be true or false.',
 
+    'cars_retrieved_successfully' => 'Cars retrieved successfully.',
+
+    'max_price_must_be_greater_than_min_price' => 'The maximum price must be greater than or equal to the minimum price.',
+
 ];

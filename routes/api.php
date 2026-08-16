@@ -76,9 +76,8 @@ Route::prefix('v1')->group(function(){
     });
 
 
-
-
-
+    // Public Cars
+    Route::get('/cars', [CarController::class, 'index']);
 
 
 

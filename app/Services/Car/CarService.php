@@ -10,6 +10,85 @@ use App\Enums\CarStatus;
 
 class CarService
 {
+    public function index(array $filters)
+    {
+        $query = Car::query()
+            ->where('status', CarStatus::PUBLISHED->value)
+            ->with([
+                'brand',
+                'carModel',
+                'carType',
+                'features',
+                'location.city',
+                'pricing',
+                'pricing.discountRules',
+                'images',
+                'policy',
+            ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Location
+        |--------------------------------------------------------------------------
+        */
+
+        if (isset($filters['city_id'])) {
+            $query->whereHas('location', function ($q) use ($filters) {
+                $q->where('city_id', $filters['city_id']);
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Car Type
+        |--------------------------------------------------------------------------
+        */
+
+        if (isset($filters['car_type_id'])) {
+            $query->where(
+                'car_type_id',
+                $filters['car_type_id']
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Price
+        |--------------------------------------------------------------------------
+        */
+
+        if (isset($filters['min_price'])) {
+            $query->whereHas('pricing', function ($q) use ($filters) {
+                $q->where(
+                    'daily_price',
+                    '>=',
+                    $filters['min_price']
+                );
+            });
+        }
+
+        if (isset($filters['max_price'])) {
+            $query->whereHas('pricing', function ($q) use ($filters) {
+                $q->where(
+                    'daily_price',
+                    '<=',
+                    $filters['max_price']
+                );
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Pagination
+        |--------------------------------------------------------------------------
+        */
+
+        return $query
+            ->latest()
+            ->paginate(
+                $filters['per_page'] ?? 10
+            );
+    }
 
     public function create(array $data): Car
     {

@@ -67,6 +67,7 @@ class CarController extends Controller
 
     public function store(StoreCarRequest $request)
     {
+        $this->authorize('create', Car::class);
 
         $car = $this->carService->create($request->validated());
 

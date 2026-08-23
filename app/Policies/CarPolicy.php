@@ -29,7 +29,7 @@ class CarPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasAnyRole(['admin', 'owner']);
     }
 
     /**

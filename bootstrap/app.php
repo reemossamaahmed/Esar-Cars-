@@ -15,6 +15,7 @@ use Spatie\Permission\Middleware\RoleMiddleware;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
 use Spatie\Permission\Exceptions\UnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -104,6 +105,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         });
 
+
         $exceptions->render(function (ModelNotFoundException $e, $request) {
 
             if ($request->expectsJson()) {
@@ -117,16 +119,39 @@ return Application::configure(basePath: dirname(__DIR__))
 
         });
 
+
+
         $exceptions->render(function (NotFoundHttpException $e, $request) {
 
-            if ($request->expectsJson()) {
-
-                return ApiResponse::error(
-                    message: __('messages.route_not_found'),
-                    code: 404,
-                );
-
+            if (! $request->expectsJson()) {
+                return null;
             }
+
+            App::setLocale(
+                $request->header('Accept-Language', config('app.locale'))
+            );
+
+            $message = str_starts_with(
+                $e->getMessage(),
+                'No query results for model'
+            )
+                ? __('messages.resource_not_found')
+                : __('messages.route_not_found');
+
+            return ApiResponse::error(
+                message: $message,
+                code: 404,
+            );
+        });
+
+
+
+        $exceptions->render(function (AccessDeniedHttpException $e, $request) {
+
+            return ApiResponse::error(
+                message: __('auth.unauthorized'),
+                code: 403,
+            );
 
         });
 
@@ -151,7 +176,6 @@ return Application::configure(basePath: dirname(__DIR__))
             );
 
         });
-
 
 
 

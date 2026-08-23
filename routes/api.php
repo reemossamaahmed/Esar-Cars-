@@ -40,7 +40,7 @@ Route::prefix('v1')->group(function(){
         Route::post('/google', [GoogleAuthController::class, 'login']);
     });
 
-    Route::middleware(['auth:sanctum', 'role:owner'])->scopeBindings()->prefix('owner')->group(function () {
+    Route::middleware(['auth:sanctum', 'role:owner|admin'])->scopeBindings()->prefix('owner')->group(function () {
 
         //CREATE CAR MODULE
         Route::post('/cars',[CarController::class, 'store']);

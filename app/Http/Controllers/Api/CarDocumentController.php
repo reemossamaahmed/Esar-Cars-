@@ -15,7 +15,7 @@ class CarDocumentController extends Controller
     {
     }
 
-    public function store(StoreCarDocumentsRequest $request, Car $car)
+    public function save(StoreCarDocumentsRequest $request, Car $car)
     {
 
         /*

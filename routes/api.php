@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\CarCalendarController;
 use App\Http\Controllers\Api\CarMediaController;
 use App\Http\Controllers\Api\CarCancellationPolicyController;
 use App\Http\Controllers\Api\LookupController;
+use App\Http\Controllers\Api\OwnerRequestController;
+use App\Http\Controllers\Api\OwnerDocumentController;
 
 
 
@@ -39,6 +41,7 @@ Route::prefix('v1')->group(function(){
 
         Route::post('/google', [GoogleAuthController::class, 'login']);
     });
+
 
     Route::middleware(['auth:sanctum', 'role:owner|admin'])->scopeBindings()->prefix('owner')->group(function () {
 
@@ -76,6 +79,15 @@ Route::prefix('v1')->group(function(){
 
     });
 
+    Route::middleware('auth:sanctum')->prefix('owner-requests')->group(function () {
+        Route::post('/documents', [OwnerDocumentController::class,'store']);
+        Route::post('/', [OwnerRequestController::class,'store']);
+    });
+
+    Route::middleware(['auth:sanctum','role:admin',])->prefix('admin/owner-requests')->group(function () {
+        Route::patch('/{ownerRequest}/approve',[OwnerRequestController::class, 'approve']);
+        Route::patch('/{ownerRequest}/reject',[OwnerRequestController::class, 'reject']);
+    });
 
     // Public Cars
     Route::get('/cars', [CarController::class, 'index']);

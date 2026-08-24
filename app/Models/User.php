@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles, HasApiTokens;
 
+    protected $guard_name = 'api';
+    
     protected $fillable = [
         'name',
         'phone',
@@ -55,5 +57,10 @@ class User extends Authenticatable
     public function ownerDocument()
     {
         return $this->hasOne(OwnerDocument::class);
+    }
+
+    public function ownerRequests()
+    {
+        return $this->hasMany(OwnerRequest::class);
     }
 }

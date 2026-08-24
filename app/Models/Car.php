@@ -157,4 +157,9 @@ class Car extends Model
     {
         return $this->hasOne(CarPolicy::class);
     }
+
+    public function handoverPolicy()
+    {
+        return $this->hasOne(CarHandoverPolicy::class);
+    }
 }

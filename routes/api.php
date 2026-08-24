@@ -13,7 +13,7 @@ use App\Http\Controllers\Api\CarCancellationPolicyController;
 use App\Http\Controllers\Api\LookupController;
 use App\Http\Controllers\Api\OwnerRequestController;
 use App\Http\Controllers\Api\OwnerDocumentController;
-
+use App\Http\Controllers\Api\CarHandoverPolicyController;
 
 
 Route::prefix('v1')->group(function(){
@@ -75,9 +75,15 @@ Route::prefix('v1')->group(function(){
 
         Route::patch('/cars/{car}/cancellation-policy',[CarCancellationPolicyController::class,'update']);
 
+        Route::post('/cars/{car}/handover-policy',[CarHandoverPolicyController::class, 'store']);
+
         Route::get('/cars/{car}',[CarController::class, 'show']);
 
     });
+
+
+
+
 
     Route::middleware('auth:sanctum')->prefix('owner-requests')->group(function () {
         Route::post('/documents', [OwnerDocumentController::class,'store']);
@@ -91,6 +97,8 @@ Route::prefix('v1')->group(function(){
 
     // Public Cars
     Route::get('/cars', [CarController::class, 'index']);
+
+    Route::middleware('auth:sanctum')->get('/cars/{car}/handover-policy',[CarHandoverPolicyController::class, 'show']);
 
 
     Route::prefix('lookups')->group(function () {

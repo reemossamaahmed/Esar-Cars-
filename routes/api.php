@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\LookupController;
 use App\Http\Controllers\Api\OwnerRequestController;
 use App\Http\Controllers\Api\OwnerDocumentController;
 use App\Http\Controllers\Api\CarHandoverPolicyController;
+use App\Http\Controllers\Api\BookingController;
 
 
 Route::prefix('v1')->group(function(){
@@ -93,6 +94,10 @@ Route::prefix('v1')->group(function(){
     Route::middleware(['auth:sanctum','role:admin',])->prefix('admin/owner-requests')->group(function () {
         Route::patch('/{ownerRequest}/approve',[OwnerRequestController::class, 'approve']);
         Route::patch('/{ownerRequest}/reject',[OwnerRequestController::class, 'reject']);
+
+        // lesa m3mlnhm4
+        // Route::get('/',[OwnerRequestController::class, 'index']);
+        // Route::get('/{ownerRequest}',[OwnerRequestController::class, 'show']);
     });
 
     // Public Cars
@@ -108,6 +113,12 @@ Route::prefix('v1')->group(function(){
         Route::get('/cities', [LookupController::class, 'cities']);
         Route::get('/features', [LookupController::class, 'features']);
     });
+
+
+    Route::middleware('auth:sanctum')->prefix('bookings')->group(function () {
+            Route::post('/', [BookingController::class, 'store']);
+    });
+
 
 });
 
